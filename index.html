@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya's Mechanical Magic - Python for Kids</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=JetBrains+Mono:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- CodeMirror CSS & JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/python/python.min.js"></script>
+    
+    <!-- Skulpt Core & Stdlib -->
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js" type="text/javascript"></script>
+
+    <!-- Custom Theme Styling -->
+    <style>
+        /* Smooth Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; /* slate-900 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; /* slate-700 */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; /* slate-600 */
+        }
+
+        /* Custom CodeMirror Theme Overrides */
+        .CodeMirror {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            height: 100% !important;
+            background: #090d16 !important; /* Premium dark slate */
+            color: #cbd5e1; /* slate-300 */
+        }
+        .CodeMirror-gutters {
+            background: #05070c !important;
+            border-right: 1px solid #1e293b !important; /* slate-800 */
+        }
+        .CodeMirror-linenumber {
+            color: #475569 !important; /* slate-600 */
+            padding-left: 8px;
+        }
+        .cm-s-custom-theme .cm-keyword {
+            color: #c084fc !important; /* purple-400 (Logic) */
+            font-weight: bold;
+        }
+        .cm-s-custom-theme .cm-string {
+            color: #22d3ee !important; /* cyan-400 (Strings) */
+        }
+        .cm-s-custom-theme .cm-number {
+            color: #34d399 !important; /* emerald-400 (Numbers) */
+        }
+        .cm-s-custom-theme .cm-builtin {
+            color: #fbbf24 !important; /* amber-400 (System/Controls) */
+            font-weight: bold;
+        }
+        .cm-s-custom-theme .cm-comment {
+            color: #64748b !important; /* slate-500 */
+            font-style: italic;
+        }
+        .cm-s-custom-theme .cm-variable {
+            color: #e2e8f0 !important; /* slate-200 */
+        }
+        .cm-s-custom-theme .cm-operator {
+            color: #f43f5e !important; /* rose-500 */
+        }
+        .CodeMirror-cursor {
+            border-left: 2px solid #fbbf24 !important; /* amber-400 */
+        }
+        .CodeMirror-selected {
+            background: rgba(251, 191, 36, 0.15) !important; /* amber-400 selection */
+        }
+
+        /* Sound Wave Animation */
+        @keyframes soundwave {
+            0%, 100% { height: 4px; }
+            50% { height: 20px; }
+        }
+        .wave-bar {
+            width: 3px;
+            height: 4px;
+            background-color: #fbbf24; /* amber-400 */
+            border-radius: 2px;
+            animation: soundwave 1.2s ease-in-out infinite;
+            display: inline-block;
+        }
+        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+        .wave-bar:nth-child(4) { animation-delay: 0.1s; }
+        .wave-bar:nth-child(5) { animation-delay: 0.3s; }
+
+        /* Cog-Bot Blink Animation */
+        @keyframes eye-blink {
+            0%, 95%, 100% { transform: scaleY(1); }
+            97% { transform: scaleY(0.1); }
+        }
+        .animate-blink {
+            animation: eye-blink 4s linear infinite;
+            transform-origin: center;
+        }
+
+        /* Custom glow styles */
+        .glow-amber {
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
+        }
+        .glow-cyan {
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.15);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 15px rgba(52, 211, 153, 0.15);
+        }
+        .glow-purple {
+            box-shadow: 0 0 15px rgba(192, 132, 252, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans h-screen flex flex-col overflow-hidden select-none">
+
+    <!-- Header / Top Bar -->
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-3 flex items-center justify-between shrink-0">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-tr from-amber-500 to-purple-600 p-2 rounded-xl shadow-lg flex items-center justify-center">
+                <!-- Mechanical Cog SVG Logo -->
+                <svg class="h-6 w-6 text-slate-950 animate-[spin_12s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="font-display font-bold text-xl tracking-wide bg-gradient-to-r from-amber-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                    Maya's Mechanical Magic
+                </h1>
+                <p class="text-xs text-slate-400 font-medium tracking-wider uppercase">Workshop Control Panel</p>
+            </div>
+        </div>
+
+        <!-- Pilot name badge -->
+        <div id="pilot-badge" class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700/50 text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-slate-400">Pilot:</span>
+            <span id="pilot-name-text" class="text-emerald-300 font-mono">Guest Inventor</span>
+        </div>
+
+        <!-- Curriculum module progress selector -->
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2">
+                <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider hidden sm:inline-block">Lesson Navigation</span>
+                <select id="lesson-selector" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-300 focus:outline-none focus:border-amber-400/50 cursor-pointer">
+                    <!-- Dynamic Options -->
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Desktop Workspace Grid -->
+    <main class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-5 p-5 overflow-hidden bg-slate-950">
+        
+        <!-- Left Panel: Lesson Details & Graphic Story (5 Columns) -->
+        <section class="lg:col-span-5 flex flex-col gap-4 overflow-y-auto h-full pr-1">
+            
+            <!-- Lesson Heading & Concept Info Card -->
+            <div id="lesson-header-card" class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 shadow-xl transition-all duration-300">
+                <div class="flex items-center justify-between gap-3 mb-3">
+                    <span id="module-tag" class="text-xs font-bold text-purple-400 tracking-wider uppercase bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full">
+                        Module 1: The Workshop Foundations
+                    </span>
+                    <span id="lesson-number" class="text-sm font-bold text-slate-400 font-mono bg-slate-800 px-2 py-1 rounded-md">
+                        1 / 14
+                    </span>
+                </div>
+                <h2 id="lesson-title" class="font-display font-bold text-2xl text-slate-100 mb-3">
+                    The print() Command
+                </h2>
+                <div id="concept-container" class="flex flex-col gap-2 p-3.5 rounded-xl border transition-all duration-300">
+                    <div class="flex items-center gap-2">
+                        <span id="concept-badge" class="text-xs font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">
+                            Concept
+                        </span>
+                        <span id="concept-title" class="text-sm font-bold text-slate-200">
+                            Displaying Messages
+                        </span>
+                    </div>
+                    <p id="concept-desc" class="text-xs text-slate-400 leading-relaxed font-medium">
+                        Telling the computer to show text on the screen.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Visual Graphic / Interactive Placeholder Container -->
+            <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-xl flex flex-col items-center justify-center relative overflow-hidden group w-full aspect-video">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(30,41,59,0.3)_0%,transparent_70%)] pointer-events-none"></div>
+                
+                <!-- Graphic Display -->
+                <div id="graphic-display" class="w-full h-full flex items-center justify-center rounded-xl overflow-hidden transition-all duration-300 bg-slate-950/50">
+                    <!-- Clean <img> tag for dynamic illustration binding -->
+                    <img id="lesson-image" class="w-full h-full object-contain rounded-lg transition-all duration-500 group-hover:scale-105 hidden" src="" alt="Lesson Illustration">
+                    
+                    <!-- Clean, dark placeholder box with gear icon for later lessons -->
+                    <div id="lesson-placeholder" class="w-full h-full flex flex-col items-center justify-center p-6 text-center rounded-xl relative hidden select-none">
+                        <!-- Background Grid Graphic -->
+                        <div class="absolute inset-0 opacity-[0.02] pointer-events-none bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+                        
+                        <!-- Spinning Gears -->
+                        <div class="flex items-center gap-2 mb-3.5 relative z-10">
+                            <svg class="w-12 h-12 text-cyan-400 animate-[spin_10s_linear_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <circle cx="12" cy="12" r="2.5" />
+                            </svg>
+                            <svg class="w-8 h-8 text-purple-400 animate-[spin_6s_linear_infinite_reverse] -ml-2 -mt-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <circle cx="12" cy="12" r="2.5" />
+                            </svg>
+                        </div>
+                        
+                        <h4 class="text-sm font-semibold font-display tracking-wide text-slate-400 mb-1.5 z-10 uppercase">
+                            Illustration Coming Soon
+                        </h4>
+                        <p id="placeholder-info" class="text-[11px] text-slate-500 font-medium max-w-[260px] leading-normal z-10">
+                            The machinery is actively rendering visual concept cards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Narrated Story & Speech Controls -->
+            <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 shadow-xl flex flex-col gap-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-display font-bold text-lg text-slate-200 flex items-center gap-2">
+                        <span>📖</span> The Workshop Story
+                    </h3>
+                    <div class="flex items-center gap-2">
+                        <!-- Wave visualizer shown when speaking -->
+                        <div id="wave-visualizer" class="hidden items-end gap-1 h-5 px-2">
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                            <span class="wave-bar"></span>
+                        </div>
+                        
+                        <!-- Speak Button -->
+                        <button id="speak-btn" onclick="toggleSpeech()" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-95 transition-all">
+                            <span id="speak-icon">🔊</span>
+                            <span id="speak-text">Listen to Story</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <p id="story-text" class="text-sm text-slate-300 leading-relaxed font-medium">
+                    Loading workshop stories...
+                </p>
+                
+                <!-- Mission Guidance -->
+                <div class="border-t border-slate-800/60 pt-3.5">
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">🚀 Your Mission</span>
+                    <ul id="mission-list" class="text-xs text-slate-400 space-y-2 list-disc pl-4 font-medium leading-relaxed">
+                        <!-- Dynamic guidelines -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation Controls Card -->
+            <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-xl flex items-center justify-between mt-auto">
+                <button id="prev-btn" onclick="prevLesson()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700/80 text-slate-300 font-bold text-sm rounded-xl disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all flex items-center gap-2">
+                    ← Back
+                </button>
+
+                <!-- Indicator dots -->
+                <div class="flex items-center gap-1.5" id="nav-dots">
+                    <!-- Dynamic Dots -->
+                </div>
+
+                <button id="next-btn" onclick="nextLesson()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm rounded-xl active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-amber-500/10">
+                    Next Lesson →
+                </button>
+            </div>
+
+        </section>
+
+        <!-- Right Panel: Editor & Terminal Sandbox (7 Columns) -->
+        <section class="lg:col-span-7 flex flex-col gap-4 h-full">
+            
+            <!-- Code Editor Container -->
+            <div class="flex-1 min-h-[300px] flex flex-col rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl relative">
+                
+                <!-- Editor Header -->
+                <div class="bg-slate-900/90 border-b border-slate-800/80 px-4 py-3 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-2.5">
+                        <span class="flex gap-1.5">
+                            <span class="w-3.5 h-3.5 rounded-full bg-rose-500/80"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-amber-500/80"></span>
+                            <span class="w-3.5 h-3.5 rounded-full bg-emerald-500/80"></span>
+                        </span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono flex items-center gap-2 ml-2">
+                            <span>🔧</span> Magic Recipe Book
+                        </span>
+                    </div>
+                    
+                    <!-- Run Controls -->
+                    <div class="flex items-center gap-3">
+                        <button onclick="showHint()" id="hint-btn" class="px-3.5 py-1.5 bg-cyan-500/90 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl active:scale-95 transition-all flex items-center gap-1.5 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/25 border border-cyan-400/20">
+                            💡 Hint
+                        </button>
+                        <button onclick="resetCode()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl active:scale-95 transition-all flex items-center gap-1.5">
+                            🔄 Reset
+                        </button>
+                        <button onclick="runPython()" id="run-btn" class="px-5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-xl flex items-center gap-1.5 active:scale-95 transition-all shadow-lg shadow-amber-500/10 hover:shadow-amber-500/25 border border-amber-400/20">
+                            ▶ Run Code
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CodeMirror Editor mount -->
+                <div class="flex-1 relative overflow-hidden" id="editor-wrapper">
+                    <!-- Injected CodeMirror will take 100% height -->
+                </div>
+
+                <!-- Cog-Bot Companion Strip (mood reactions + on-demand hints) -->
+                <div class="bg-slate-900/90 border-t border-slate-800/80 px-4 py-2.5 flex items-center gap-3 shrink-0">
+                    <!-- Cog-Bot face (the character survives here) -->
+                    <div class="w-9 h-9 bg-slate-950 border border-slate-800 rounded-lg flex items-center justify-center shrink-0 relative overflow-hidden">
+                        <svg class="w-7 h-7" viewBox="0 0 100 100" fill="none">
+                            <!-- Head -->
+                            <rect x="20" y="25" width="60" height="50" rx="10" fill="#334155" stroke="#475569" stroke-width="6"/>
+                            <!-- Ears -->
+                            <rect x="10" y="40" width="10" height="20" rx="4" fill="#64748b"/>
+                            <rect x="80" y="40" width="10" height="20" rx="4" fill="#64748b"/>
+                            <!-- Antenna -->
+                            <line x1="50" y1="25" x2="50" y2="10" stroke="#64748b" stroke-width="6"/>
+                            <circle cx="50" cy="8" r="6" fill="#fbbf24" id="bot-antenna"/>
+                            <!-- Eyes (Blinking) -->
+                            <g id="bot-eyes" fill="#fbbf24">
+                                <circle class="animate-blink" cx="38" cy="48" r="6"/>
+                                <circle class="animate-blink" cx="62" cy="48" r="6"/>
+                            </g>
+                            <!-- Mouth -->
+                            <path d="M40 63 Q50 67 60 63" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" id="bot-mouth"/>
+                        </svg>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest block">Cog-Bot</span>
+                        <span id="bot-bubble" class="text-xs text-slate-300 font-semibold italic font-medium">"I'm ready, Master Inventor! Tap 💡 Hint if you get stuck."</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Output Container -->
+            <div class="h-[250px] flex flex-col rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl relative">
+                
+                <!-- Terminal Header -->
+                <div class="bg-slate-900/90 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">📟 Workshop Console Output</span>
+                    </div>
+                    <button onclick="clearTerminal()" class="px-2.5 py-1 text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 rounded-md font-bold transition-colors">
+                        Clear
+                    </button>
+                </div>
+
+                <!-- Terminal Output Display -->
+                <div class="flex-1 p-4 overflow-y-auto font-mono text-sm leading-relaxed" id="terminal-wrapper" onclick="focusTerminalInput()">
+                    <div id="terminal-body" class="whitespace-pre-wrap text-slate-300"></div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Kid-Friendly Error Box Alert (Slide-in toast) -->
+    <div id="error-toast" class="fixed bottom-6 right-6 z-50 max-w-md w-[90%] transform translate-y-24 opacity-0 pointer-events-none transition-all duration-300 ease-out">
+        <div class="bg-gradient-to-r from-red-600 to-rose-600 border border-rose-500 text-slate-100 p-5 rounded-2xl shadow-2xl flex items-start gap-4">
+            <!-- Alert Warning Icon -->
+            <div class="bg-slate-950/20 p-2.5 rounded-xl border border-rose-400/20 shrink-0">
+                <svg class="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h4 class="font-display font-extrabold text-base tracking-wide text-white">❌ Mistake in the recipe:</h4>
+                <p id="error-message" class="text-xs text-rose-100 font-semibold font-mono leading-relaxed mt-1 mb-2"></p>
+                <div class="bg-black/25 rounded-lg p-2.5 border border-rose-500/20 text-[11px] leading-relaxed">
+                    <span class="font-bold text-amber-300">🔧 Assistant Tip:</span>
+                    <span id="error-tip" class="text-slate-200">Double check spelling, quotes, and punctuation! Or restore starter code.</span>
+                </div>
+            </div>
+            <button onclick="closeErrorToast()" class="text-rose-100 hover:text-white font-bold p-1 rounded-md hover:bg-white/10 transition-colors shrink-0">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Graduation Ceremony Modal -->
+    <div id="grad-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-950/80 backdrop-blur-md transition-opacity duration-300">
+        <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 max-w-md w-[90%] p-6 rounded-3xl shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+            <!-- Confetti decorations -->
+            <div class="absolute inset-0 pointer-events-none opacity-40">
+                <div class="absolute w-2.5 h-2.5 bg-amber-400 rounded-full top-10 left-12 animate-ping"></div>
+                <div class="absolute w-3 h-3 bg-cyan-400 transform rotate-45 top-24 right-16 animate-pulse"></div>
+                <div class="absolute w-2 h-2 bg-purple-400 rounded-full bottom-20 left-20 animate-ping"></div>
+                <div class="absolute w-3 h-3 bg-emerald-400 transform rotate-12 bottom-12 right-24 animate-pulse"></div>
+            </div>
+            
+            <!-- Graduation Badge -->
+            <div class="bg-gradient-to-tr from-amber-400 to-amber-600 p-4 rounded-full shadow-2xl text-slate-950 mb-4 animate-bounce">
+                <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                </svg>
+            </div>
+
+            <h3 class="font-display font-black text-2xl bg-gradient-to-r from-amber-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
+                Congratulations, Master Inventor!
+            </h3>
+            <p class="text-slate-400 text-xs font-semibold uppercase tracking-wider mb-4">Python Training Accomplished</p>
+            
+            <!-- Certificate Panel -->
+            <div class="w-full bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-inner mb-5 flex flex-col items-center">
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">This Certificate is Awarded to</p>
+                <p id="grad-pilot-name" class="text-xl font-display font-extrabold text-cyan-400 my-2">Guest Inventor</p>
+                <div class="h-[1px] w-[60%] bg-slate-800 my-1"></div>
+                <p class="text-[10px] text-slate-400 font-medium max-w-[240px] leading-relaxed">
+                    For successfully engineering 14 software blueprints and unlocking Cog-Bot's mechanical magic core!
+                </p>
+            </div>
+
+            <div class="flex gap-3 w-full">
+                <button onclick="closeGradModal()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-sm rounded-xl transition-all active:scale-95">
+                    Close
+                </button>
+                <button onclick="window.print()" class="flex-1 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-xl transition-all active:scale-95 shadow-lg shadow-amber-500/15">
+                    🖨️ Print
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Javascript Curriculum Matrix & App Controller -->
+    <script>
+        // 14-Lesson Curriculum Matrix derived from blueprint.md
+        const curriculum = [
+            {
+                id: 1,
+                module: "📦 Module 1: The Workshop Foundations",
+                title: "The print() Command",
+                concept: "Displaying Messages",
+                conceptType: "amber",
+                conceptDesc: "Telling the computer to show text on the screen.",
+                image: "assets/lesson1.png",
+                voiceText: "Welcome to the workshop! Coding isn't mystery magic—it's just a recipe book of clear instructions. When Maya types a command like 'print' into the magic book, the workshop listens and makes things happen. Try running the code to say hello to Cog-Bot!",
+                code: `print("Hello, Cog-Bot!")`,
+                guidelines: [
+                    "Use the <code>print()</code> command to make the workshop show a message on screen.",
+                    "Whatever you put between the quote marks is what gets displayed — write your own greeting to Cog-Bot!",
+                    "Click the amber <b>▶ Run Code</b> button and check the console."
+                ],
+                hints: [
+                    "The command that shows text is five letters and ends in brackets.",
+                    "Try print( ) and put your message between quote marks inside the brackets."
+                ],
+                successHook: (globals, terminal) => {
+                    return "⚙️ Cog-Bot says: 'Hello! I am boot-completed and ready for orders!'";
+                }
+            },
+            {
+                id: 2,
+                module: "📦 Module 1: The Workshop Foundations",
+                title: "String Variables",
+                concept: "String Variables",
+                conceptType: "cyan",
+                conceptDesc: "Storing words inside labeled memory containers.",
+                image: "assets/lesson2.png",
+                voiceText: "To help our robot remember things, Maya uses magic storage boxes called variables. Each box gets a clear label and stores one piece of information, like a name. Let's see what name is currently inside our box!",
+                code: `robot_name = "Cog-Bot"\nprint("The robot's name is:")\nprint(robot_name)`,
+                guidelines: [
+                    "Make a box called <code>robot_name</code> and store a name inside it with the <code>=</code> sign. Words always go between quote marks.",
+                    "On the next line, <code>print()</code> the box label with <b>no</b> quotes to reveal what is inside it.",
+                    "Run it. Then store a different name and run again — the box updates!"
+                ],
+                hints: [
+                    "Make the box first, then on a new line ask Python to show what's inside it.",
+                    "robot_name = \"...\"  then on the next line  print(robot_name)  — no quotes around the box name when printing."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.robot_name) {
+                        return `⚙️ Cog-Bot says: 'Beep! My system name has been updated to "${globals.robot_name}"!'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 3,
+                module: "📦 Module 1: The Workshop Foundations",
+                title: "Number Variables & Math",
+                concept: "Number Variables & Math",
+                conceptType: "emerald",
+                conceptDesc: "Storing integers and using operators (+, -, *, /) for calculations.",
+                image: "assets/lesson3.png",
+                voiceText: "Variables can store numbers too! Maya can count her spare parts and use math to see how many total pieces she has available. Let's add our storage boxes together.",
+                code: `box_a = 10\nbox_b = 5\ntotal_bolts = box_a + box_b\nprint("Total bolts in workshop:")\nprint(total_bolts)`,
+                guidelines: [
+                    "Make two number boxes (numbers need <b>no</b> quote marks), then a third box that adds them together using <code>+</code>.",
+                    "Print the total box to show the sum.",
+                    "Run it, then change one number and watch the total change."
+                ],
+                hints: [
+                    "Numbers need no quote marks. Make two, then add them into a third box.",
+                    "box_a = 10, box_b = 5, total = box_a + box_b, then print(total)."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.total_bolts !== undefined) {
+                        return `⚙️ Cog-Bot says: 'Math engine verified! Total bolt count calculated: ${globals.total_bolts}!'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 4,
+                module: "📦 Module 1: The Workshop Foundations",
+                title: "User Input",
+                concept: "User Input",
+                conceptType: "amber",
+                conceptDesc: "Pausing the program to let the user type information.",
+                image: "assets/lesson4.png",
+                voiceText: "Let's make the code a two-way street. We can use the 'input' command to talk directly to the program while it runs. Type your name into the box when it asks!",
+                code: `pilot_name = input("Enter your name, Pilot: ")\nprint("Welcome to the control center, " + pilot_name)`,
+                guidelines: [
+                    "Use <code>input()</code> to ask a question — the words inside become the prompt the user sees — and store the answer in a box.",
+                    "Then <code>print()</code> a welcome that joins your own text and the answer box together with <code>+</code>.",
+                    "Run it, type your name, press <b>Enter</b>, and watch the header update!"
+                ],
+                hints: [
+                    "input() asks the question AND hands back the answer — catch it in a box.",
+                    "name = input(\"...\")  then  print(\"Welcome \" + name)."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.pilot_name) {
+                        state.pilotName = globals.pilot_name;
+                        updatePilotBadge();
+                        return `⚙️ Cog-Bot says: 'Welcome aboard, Pilot ${globals.pilot_name}! Profile loaded!'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 5,
+                module: "🚦 Module 2: Making Decisions",
+                title: "Simple IF Statements",
+                concept: "Simple IF Statements",
+                conceptType: "purple",
+                conceptDesc: "Running a block of code only if a specific condition is True.",
+                image: null,
+                voiceText: "An 'if' statement is like a mechanical switch. If the condition is true, the code inside runs. If it's false, the computer completely skips it! Try changing True to False to see what happens.",
+                code: `switch_on = True\nif switch_on == True:\n    print("💡 The workshop lights turn on!")`,
+                guidelines: [
+                    "Make a box set to <code>True</code> or <code>False</code>.",
+                    "Write an <code>if</code> statement that checks the box. The line underneath must be indented <b>4 spaces</b>.",
+                    "Run it. Then flip the value and run again — what changes?"
+                ],
+                hints: [
+                    "An if needs a colon at the end, and its action goes on the next line pushed in 4 spaces.",
+                    "switch = True  /  if switch == True:  /  (4 spaces) print(\"...\")."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.switch_on === false) {
+                        return "⚙️ Cog-Bot whispers: 'The switch is Off. The console is dark. Perfect for sleeping!'";
+                    }
+                    return "⚙️ Cog-Bot says: 'Bzzzt! The switch is On, lights are glowing!'";
+                }
+            },
+            {
+                id: 6,
+                module: "🚦 Module 2: Making Decisions",
+                title: "ELSE and ELIF Chains",
+                concept: "ELSE and ELIF Chains",
+                conceptType: "purple",
+                conceptDesc: "Handling multiple alternative choices in decision making.",
+                image: null,
+                voiceText: "What if a switch has more than two choices? We can use 'elif' and 'else' to create a multi-track railway for our logic to follow based on battery levels.",
+                code: `battery_level = 20\n\nif battery_level > 70:\n    print("🔋 Battery is full!")\nelif battery_level > 30:\n    print("⚠️ Battery is getting low.")\nelse:\n    print("🚨 Battery dead! Plug in immediately!")`,
+                guidelines: [
+                    "Start with a <code>battery_level</code> number, then build an <code>if</code> / <code>elif</code> / <code>else</code> chain with a different message for full, low, and dead.",
+                    "Choose your own cut-off numbers using <code>&gt;</code>, and indent each message <b>4 spaces</b>.",
+                    "Run it, then test levels like 85, 45, and 10."
+                ],
+                hints: [
+                    "Check the biggest number first with if, the middle with elif, let else catch the rest.",
+                    "if level > 70: ...  /  elif level > 30: ...  /  else: ..."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.battery_level !== undefined) {
+                        return `⚙️ Cog-Bot says: 'Battery level analyzed at ${globals.battery_level}%. Current state simulated.'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 7,
+                module: "🚦 Module 2: Making Decisions",
+                title: "Complex Logic (AND)",
+                concept: "Complex Logic (AND)",
+                conceptType: "purple",
+                conceptDesc: "Combining multiple conditions using the 'and' operator.",
+                image: null,
+                voiceText: "Sometimes multiple conditions must be true at once. We use the word 'and' to connect them. Let's see if we have enough parts to unlock our flying drone blueprint!",
+                code: `has_metal = True\nbolt_count = 12\n\nif has_metal == True and bolt_count >= 10:\n    print("🚀 Blueprint unlocked! Building drone.")\nelse:\n    print("❌ Missing parts.")`,
+                guidelines: [
+                    "Make two conditions — one True/False box and one number box.",
+                    "Combine them in a single <code>if</code> using the word <code>and</code> (both must be true to pass), and add an <code>else</code> for when parts are missing.",
+                    "Run it, then lower the bolt number and watch it fail."
+                ],
+                hints: [
+                    "Put both checks on ONE if line, joined by the word and.",
+                    "if has_metal == True and bolts >= 10:"
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.has_metal && globals.bolt_count >= 10) {
+                        return "⚙️ Cog-Bot says: 'Vault opened! Construction of the hover-drone has begun!'";
+                    }
+                    return "⚙️ Cog-Bot sighs: 'Vault remains locked. Fetch more bolts from the workshop shelves!'";
+                }
+            },
+            {
+                id: 8,
+                module: "🔄 Module 3: Storage & Loops",
+                title: "Python Lists",
+                concept: "Python Lists",
+                conceptType: "cyan",
+                conceptDesc: "Storing multiple indexed items inside a single variable container.",
+                image: null,
+                voiceText: "Instead of creating a separate box for every single item, we can use a list to store a whole row of tools inside one single variable cupboard!",
+                code: `tools = ["Hammer", "Wrench", "Pliers"]\nprint("The item in drawer 0 is:")\nprint(tools[0])`,
+                guidelines: [
+                    "Make a list using square brackets <code>[ ]</code> with items separated by commas.",
+                    "Print one item using its drawer number in brackets — remember, drawer counting starts at <b>0</b>.",
+                    "Run it, then try printing drawer 1 and drawer 2."
+                ],
+                hints: [
+                    "Square brackets hold the list; a number in brackets after it picks one item.",
+                    "tools = [\"Hammer\", \"Wrench\"]  then  print(tools[0])."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.tools) {
+                        return `⚙️ Cog-Bot says: 'Inventory scanned! We have ${globals.tools.length} tools stored inside the toolbox!'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 9,
+                module: "🔄 Module 3: Storage & Loops",
+                title: "FOR Loops",
+                concept: "FOR Loops",
+                conceptType: "purple",
+                conceptDesc: "Iterating through each item in a list sequentially.",
+                image: null,
+                voiceText: "A for loop lets us look at every single item inside a list automatically. The computer loops down the line so you don't have to write the print command over and over again.",
+                code: `tools = ["Hammer", "Wrench", "Pliers"]\nfor item in tools:\n    print("Scanning tool: " + item)`,
+                guidelines: [
+                    "Make a list of tools, then write a <code>for</code> loop that visits each item one at a time. Pattern: <code>for thing in mylist:</code>",
+                    "Inside the loop (indented <b>4 spaces</b>), print each item.",
+                    "Run it, then add a fourth tool to the list — the loop handles it automatically."
+                ],
+                hints: [
+                    "A for loop borrows each item one at a time into a temporary name.",
+                    "for item in tools:  /  (4 spaces) print(item)."
+                ],
+                successHook: (globals, terminal) => {
+                    return "⚙️ Cog-Bot says: 'Scanner routine complete. All tools registered in system memory!'";
+                }
+            },
+            {
+                id: 10,
+                module: "🔄 Module 3: Storage & Loops",
+                title: "WHILE Loops",
+                concept: "WHILE Loops",
+                conceptType: "purple",
+                conceptDesc: "Repeating a code block continuously as long as a condition remains True.",
+                image: null,
+                voiceText: "A while loop is like an engine that runs forever as long as its fuel switch stays True. We can use this to keep our program running non-stop!",
+                code: `fuel = 3\nwhile fuel > 0:\n    print("⚙️ Engine running! Fuel left:", fuel)\n    fuel = fuel - 1\nprint("🛑 Out of fuel. Stopping.")`,
+                guidelines: [
+                    "Start with a fuel number, then write a <code>while</code> loop that runs <i>while</i> fuel is greater than 0.",
+                    "Inside the loop: print the fuel, then subtract 1 from it — forget this and it loops forever!",
+                    "Run it, then start with more fuel and watch the engine run longer."
+                ],
+                hints: [
+                    "while keeps looping while the test is true — so something inside MUST change, or it never stops.",
+                    "fuel = 3  /  while fuel > 0:  /  (4 spaces) print(fuel)  /  (4 spaces) fuel = fuel - 1."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.fuel !== undefined) {
+                        return "⚙️ Cog-Bot says: 'Engine test complete! Fuel is fully consumed, stopping rotors safely.'";
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 15,
+                module: "🔄 Module 3: Storage & Loops",
+                title: "Dictionaries",
+                concept: "Labeled Storage",
+                conceptType: "cyan",
+                conceptDesc: "Storing values you look up by a name (a label) instead of by number.",
+                image: "assets/lesson15.png",
+                voiceText: "A list uses numbered drawers, but a dictionary uses labeled jars. Maya writes a label on each jar — like 'iron' or 'copper' — and stores a count inside. To check a jar, she just asks for it by its label!",
+                code: ``,
+                guidelines: [
+                    "Make a dictionary with curly brackets <code>{ }</code>. Each entry is a label and a value, like <code>\"iron\": 15</code>, separated by commas.",
+                    "Look one up by its label in square brackets, like <code>materials[\"iron\"]</code>, and print it.",
+                    "Run it, then change a value or add a third material and look it up."
+                ],
+                hints: [
+                    "Curly brackets hold the entries; each one is a label and a value.",
+                    "materials = {\"iron\": 15, \"copper\": 8}  then  print(materials[\"iron\"])."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.materials) {
+                        return "⚙️ Cog-Bot says: 'Labeled jars catalogued! I can find any material by name now!'";
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 11,
+                module: "🛠️ Module 4: Blueprints & Functions",
+                title: "Simple Functions",
+                concept: "Simple Functions",
+                conceptType: "amber",
+                conceptDesc: "Bundling code blocks into reusable names using 'def'.",
+                image: null,
+                voiceText: "Functions are custom blueprints. You group a collection of commands together under one short name, so you can perform a complex task instantly anywhere in your code.",
+                code: `def boot_system():\n    print("Initializing Core...")\n    print("Waking up Cog-Bot...")\n    print("🟢 System Ready!")\n\nboot_system()`,
+                guidelines: [
+                    "Use <code>def</code> to create a blueprint named <code>boot_system()</code>, with a few <code>print()</code> lines inside (indented <b>4 spaces</b>).",
+                    "Below the blueprint, with <b>no</b> indent, <i>call</i> it by writing its name followed by <code>()</code>.",
+                    "Run it, then call it twice — does it boot twice?"
+                ],
+                hints: [
+                    "def names the blueprint; lines inside are indented. Nothing runs until you call the name.",
+                    "def boot_system():  /  (4 spaces) print(\"...\")  /  then on its own line: boot_system()."
+                ],
+                successHook: (globals, terminal) => {
+                    return "⚙️ Cog-Bot says: 'Bzzzzt... systems activated! Diagnostics green! Function works!'";
+                }
+            },
+            {
+                id: 12,
+                module: "🛠️ Module 4: Blueprints & Functions",
+                title: "Functions with Inputs",
+                concept: "Functions with Inputs",
+                conceptType: "emerald",
+                conceptDesc: "Passing external arguments into functions to alter their calculations.",
+                image: null,
+                voiceText: "We can pass data into our functions to customize how the blueprint works. Watch how the same function gives different results based on the number we feed it!",
+                code: `def calculate_gears(iron):\n    gear_count = iron * 3\n    print("Gears made:", gear_count)\n\ncalculate_gears(5)`,
+                guidelines: [
+                    "Make a function with a value in its brackets, like <code>def make_gears(iron):</code>. Inside, do some math with that value and print the result.",
+                    "Call your function with a number, such as <code>make_gears(5)</code>.",
+                    "Run it, then call it again with a bigger number — same blueprint, new result."
+                ],
+                hints: [
+                    "Put a name in the brackets of def — that's the value you hand in when you call it.",
+                    "def make_gears(iron):  /  (4 spaces) print(iron * 3)  /  make_gears(5)."
+                ],
+                successHook: (globals, terminal) => {
+                    return "⚙️ Cog-Bot says: 'Output calculated! Gears stamped. Processing conveyor belt is clear.'";
+                }
+            },
+            {
+                id: 13,
+                module: "🏁 Module 5: Graduation Projects",
+                title: "Capstone Crafting Calculator",
+                concept: "Capstone Calculator",
+                conceptType: "purple",
+                conceptDesc: "Combining loops, conditionals, variables, and dict structures into an interactive terminal app.",
+                image: null,
+                voiceText: "Time for your final challenge! You are going to build a continuous command center using a loop. It keeps track of workshop materials and lets you choose whether to check your inventory stock or craft an item.",
+                code: `inventory = {"iron": 15, "copper": 8}\n\ndef show_stock():\n    print("\\n📦 Iron:", inventory["iron"], "| Copper:", inventory["copper"])\n\nrunning = True\nwhile running:\n    show_stock()\n    action = input("Options: 1=Craft, 2=Exit -> ")\n    if action == "1":\n        if inventory["iron"] >= 5 and inventory["copper"] >= 4:\n            print("✨ Successfully crafted a drone component!")\n            inventory["iron"] -= 5\n            inventory["copper"] -= 4\n        else:\n            print("❌ Not enough materials!")\n    elif action == "2":\n        print("Goodbye, Master Engineer!")\n        running = False`,
+                guidelines: [
+                    "This combines everything you have learned — build it one block at a time and run often.",
+                    "<b>1.</b> Make a <code>dictionary</code> of materials with <code>{ }</code>, e.g. an iron count and a copper count.",
+                    "<b>2.</b> Write a function that prints the current stock.",
+                    "<b>3.</b> Write a <code>while</code> loop that shows the stock, asks the user to <code>input()</code> a choice, and uses <code>if</code> / <code>elif</code> to either craft (subtract materials) or exit (stop the loop).",
+                    "Test option <b>1</b> to craft and option <b>2</b> to exit."
+                ],
+                hints: [
+                    "Build it in the 3 mission steps — dictionary, then a stock function, then the while loop. Run after each step.",
+                    "Dictionary: materials = {\"iron\": 15, \"copper\": 8}. Subtract when crafting: materials[\"iron\"] = materials[\"iron\"] - 5. Stop the loop: set running to False."
+                ],
+                successHook: (globals, terminal) => {
+                    if (globals.inventory) {
+                        return `⚙️ Cog-Bot cheers: 'Wow, dynamic system logic completed! Current inventory holds Iron: ${globals.inventory.iron}, Copper: ${globals.inventory.copper}!'`;
+                    }
+                    return null;
+                }
+            },
+            {
+                id: 14,
+                module: "🏁 Module 5: Graduation Projects",
+                title: "Desktop Graduation",
+                concept: "Desktop Graduation (VS Code)",
+                conceptType: "amber",
+                conceptDesc: "Transitioning from the browser playground to a local Python interpreter and VS Code environment.",
+                image: null,
+                voiceText: "Congratulations! You have completed the browser training course. Now you're ready to use real professional tools on your computer. Follow the steps on your screen to download Python, install VS Code, and bring your code into the real world!",
+                code: `# Follow the interactive checklist on the screen to set up your environment!\nprint("Master Inventor Status: Achieved.")`,
+                guidelines: [
+                    "Use <code>print()</code> to announce that you have graduated — write the message in your own words!",
+                    "Run it to unlock your Master Inventor license.",
+                    "Then follow the desktop setup steps to install real Python and VS Code."
+                ],
+                hints: [
+                    "Just one print() with a proud message of your own.",
+                    "print(\"...your announcement...\")"
+                ],
+                successHook: (globals, terminal) => {
+                    showGradModal();
+                    return "🏆 Cog-Bot throws confetti! 'BEEP BOOP HURRAY! You graduated, Master Inventor!'";
+                }
+            }
+        ];
+
+        // Global State Management
+        let currentLessonIndex = 0; // 0 to 13
+        
+        let state = {
+            pilotName: "Guest Inventor",
+            isSpeaking: false,
+            audioObject: null,
+            codeMirrorInstance: null,
+            executionId: 0,
+            hintIndex: 0 // Progressive hint pointer, reset per lesson in loadLesson()
+        };
+
+        // Concept styles mappings
+        const conceptColors = {
+            amber: {
+                bg: 'bg-amber-500/10',
+                text: 'text-amber-400',
+                border: 'border-amber-500/30',
+                badge: 'bg-amber-500 text-slate-950',
+                glow: 'glow-amber shadow-amber-500/10'
+            },
+            cyan: {
+                bg: 'bg-cyan-500/10',
+                text: 'text-cyan-400',
+                border: 'border-cyan-500/30',
+                badge: 'bg-cyan-500 text-slate-950',
+                glow: 'glow-cyan shadow-cyan-500/10'
+            },
+            emerald: {
+                bg: 'bg-emerald-500/10',
+                text: 'text-emerald-400',
+                border: 'border-emerald-500/30',
+                badge: 'bg-emerald-500 text-slate-950',
+                glow: 'glow-emerald shadow-emerald-500/10'
+            },
+            purple: {
+                bg: 'bg-purple-500/10',
+                text: 'text-purple-400',
+                border: 'border-purple-500/30',
+                badge: 'bg-purple-500 text-slate-950',
+                glow: 'glow-purple shadow-purple-500/10'
+            }
+        };
+
+        // Initialize App
+        window.addEventListener("DOMContentLoaded", () => {
+            initEditor();
+            populateLessonSelector();
+            buildProgressDots();
+            loadLesson(0);
+        });
+
+        // Initialize CodeMirror Editor
+        function initEditor() {
+            const wrapper = document.getElementById("editor-wrapper");
+            state.codeMirrorInstance = CodeMirror(wrapper, {
+                value: "",
+                mode: "python",
+                theme: "custom-theme", // Custom dark-slate overrides
+                lineNumbers: true,
+                styleActiveLine: true,
+                matchBrackets: true,
+                indentUnit: 4,
+                tabSize: 4,
+                indentWithTabs: false,
+                extraKeys: {
+                    "Tab": function(cm) {
+                        var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
+                        cm.replaceSelection(spaces);
+                    }
+                }
+            });
+        }
+
+        // Populate Lesson selector dropdown
+        function populateLessonSelector() {
+            const selector = document.getElementById("lesson-selector");
+            selector.innerHTML = "";
+            curriculum.forEach((lesson, index) => {
+                const opt = document.createElement("option");
+                opt.value = index;
+                opt.textContent = `L${index + 1}: ${lesson.title}`;
+                selector.appendChild(opt);
+            });
+            selector.addEventListener("change", (e) => {
+                loadLesson(parseInt(e.target.value));
+            });
+        }
+
+        // Build navigation dots
+        function buildProgressDots() {
+            const dotsContainer = document.getElementById("nav-dots");
+            dotsContainer.innerHTML = "";
+            curriculum.forEach((_, index) => {
+                const dot = document.createElement("button");
+                dot.className = "w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all duration-300";
+                dot.title = `Go to Lesson ${index + 1}`;
+                dot.onclick = () => loadLesson(index);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        // Generate hands-on code editor comment prompt
+        function getStarterCode(lesson) {
+            // Capstone: hand kids a commented skeleton instead of a blank editor —
+            // an 18-line synthesis task is too big a leap from one blank line.
+            if (lesson.id === 13) {
+                return `# Lesson 13: Capstone — build it one block at a time, run after each step!
+
+# Step 1: make a dictionary of materials (iron and copper counts)
+
+# Step 2: write a function that prints the current stock
+
+# Step 3: a while loop that shows stock, asks for a choice with input(),
+#         and uses if / elif to craft (subtract materials) or exit (stop the loop)
+`;
+            }
+
+            let instruction = "Type your code below";
+            if (lesson.id === 1) instruction = "Type your print statement here";
+            else if (lesson.id === 2) instruction = "Create the robot_name variable and print it here";
+            else if (lesson.id === 3) instruction = "Create variables box_a, box_b, and total_bolts here";
+            else if (lesson.id === 4) instruction = "Ask the pilot for their name and print a welcome message here";
+            else if (lesson.id === 5) instruction = "Create an IF switch statement here";
+            else if (lesson.id === 6) instruction = "Create an IF/ELIF/ELSE battery warning chain here";
+            else if (lesson.id === 7) instruction = "Combine conditions using 'and' to open the vault here";
+            else if (lesson.id === 8) instruction = "Create a list of tools and print drawer 0 here";
+            else if (lesson.id === 9) instruction = "Create a FOR loop to scan tools here";
+            else if (lesson.id === 10) instruction = "Create a WHILE loop water pump engine here";
+            else if (lesson.id === 11) instruction = "Create a boot_system function blueprint here";
+            else if (lesson.id === 12) instruction = "Create a calculate_gears function with inputs here";
+            else if (lesson.id === 14) instruction = "Print your graduation announcement here";
+            else if (lesson.id === 15) instruction = "Create a materials dictionary and look one up here";
+            
+            return `# Lesson ${lesson.id}: ${instruction}\n`;
+        }
+
+        // Load a specific lesson into state and UI
+        function loadLesson(index) {
+            // Cancel active audio playback
+            cancelSpeech();
+            
+            // Increment execution ID to abort any running Python loops/input streams
+            state.executionId++;
+
+            // Update indices
+            currentLessonIndex = index;
+            const lesson = curriculum[index];
+
+            // Each lesson starts fresh on the first hint
+            state.hintIndex = 0;
+
+            // Trigger visual transitions
+            const detailsCard = document.getElementById("lesson-header-card");
+            detailsCard.classList.add("opacity-30");
+            
+            setTimeout(() => {
+                // Swap text values
+                document.getElementById("module-tag").textContent = lesson.module;
+                document.getElementById("lesson-number").textContent = `${index + 1} / ${curriculum.length}`;
+                document.getElementById("lesson-title").textContent = lesson.title;
+                document.getElementById("concept-title").textContent = lesson.concept;
+                document.getElementById("concept-desc").textContent = lesson.conceptDesc;
+                document.getElementById("story-text").textContent = lesson.voiceText;
+
+                // Configure Concept Badge Color Codes
+                const colors = conceptColors[lesson.conceptType] || conceptColors.amber;
+                const badge = document.getElementById("concept-badge");
+                const conceptContainer = document.getElementById("concept-container");
+                
+                // Reset classes
+                badge.className = "text-xs font-bold px-2 py-0.5 rounded-md uppercase tracking-wider " + colors.badge;
+                conceptContainer.className = "flex flex-col gap-2 p-3.5 rounded-xl border transition-all duration-300 " + colors.bg + " " + colors.border + " " + colors.glow;
+
+                // Setup Graphic or Placeholder (Aspect-Video Container)
+                const imgEl = document.getElementById("lesson-image");
+                const placeholderEl = document.getElementById("lesson-placeholder");
+                
+                if (lesson.image) {
+                    // Show dynamic img, hide placeholder
+                    imgEl.src = lesson.image;
+                    imgEl.alt = lesson.title;
+                    imgEl.classList.remove("hidden");
+                    placeholderEl.classList.add("hidden");
+                    
+                    // Fallback to placeholder if image fails to load
+                    imgEl.onerror = () => {
+                        imgEl.classList.add("hidden");
+                        placeholderEl.classList.remove("hidden");
+                        document.getElementById("placeholder-info").textContent = `Blueprint under construction. The core machine is actively mapping the concept: ${lesson.concept}.`;
+                    };
+                } else {
+                    // Hide img, show placeholder
+                    imgEl.classList.add("hidden");
+                    placeholderEl.classList.remove("hidden");
+                    document.getElementById("placeholder-info").textContent = `Blueprint under construction. The core machine is actively mapping the concept: ${lesson.concept}.`;
+                }
+
+                // Render guidelines missions
+                const missionList = document.getElementById("mission-list");
+                missionList.innerHTML = "";
+                lesson.guidelines.forEach(guide => {
+                    const li = document.createElement("li");
+                    li.innerHTML = guide;
+                    missionList.appendChild(li);
+                });
+
+                // Update Code Editor Content - Starts empty except for instruction comment
+                state.codeMirrorInstance.setValue(getStarterCode(lesson));
+                
+                // Clear console terminal
+                clearTerminal();
+                
+                // Sync dropdown and progress dots UI
+                document.getElementById("lesson-selector").value = index;
+                updateProgressDotsUI(index);
+
+                // Update Back/Next buttons state
+                document.getElementById("prev-btn").disabled = (index === 0);
+                
+                const nextBtn = document.getElementById("next-btn");
+                if (index === curriculum.length - 1) {
+                    nextBtn.textContent = "Graduation! 🏆";
+                } else {
+                    nextBtn.textContent = "Next Lesson →";
+                }
+
+                // Remove transition opacity
+                detailsCard.classList.remove("opacity-30");
+                
+                // Reset the companion to a friendly idle state (no passive status narration)
+                updateCompanionSpeech(`"Stuck on this one? Tap 💡 Hint and I'll nudge you."`);
+
+            }, 200);
+        }
+
+        // Highlight active navigation dot
+        function updateProgressDotsUI(activeIndex) {
+            const dots = document.getElementById("nav-dots").children;
+            for (let i = 0; i < dots.length; i++) {
+                if (i === activeIndex) {
+                    dots[i].className = "w-5 h-2.5 rounded-full bg-amber-400 transition-all duration-300 shadow-md shadow-amber-400/30";
+                } else if (i < activeIndex) {
+                    dots[i].className = "w-2.5 h-2.5 rounded-full bg-purple-500/80 transition-all duration-300";
+                } else {
+                    dots[i].className = "w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-600 transition-all duration-300";
+                }
+            }
+        }
+
+        // Navigation helpers
+        function prevLesson() {
+            if (currentLessonIndex > 0) {
+                loadLesson(currentLessonIndex - 1);
+            }
+        }
+
+        function nextLesson() {
+            if (currentLessonIndex < curriculum.length - 1) {
+                loadLesson(currentLessonIndex + 1);
+            } else {
+                showGradModal();
+            }
+        }
+
+        function resetCode() {
+            const lesson = curriculum[currentLessonIndex];
+            state.codeMirrorInstance.setValue(getStarterCode(lesson));
+        }
+
+        // --- Progressive on-demand hints ---
+        // First tap shows hints[0] (a nudge), the next shows hints[1] (the pattern),
+        // and any further taps just re-show the last hint. Counter resets in loadLesson().
+        function showHint() {
+            const lesson = curriculum[currentLessonIndex];
+            if (!lesson.hints || lesson.hints.length === 0) {
+                updateCompanionSpeech(`"Hmm, no hints loaded for this one — give it your best shot!"`);
+                return;
+            }
+
+            const idx = Math.min(state.hintIndex, lesson.hints.length - 1);
+            updateCompanionSpeech(`💡 ${lesson.hints[idx]}`);
+
+            // Advance toward the pattern-level hint, then stay there
+            if (state.hintIndex < lesson.hints.length - 1) {
+                state.hintIndex++;
+            }
+        }
+
+        // --- HTML5 Audio story narration engine ---
+        function toggleSpeech() {
+            if (state.isSpeaking) {
+                cancelSpeech();
+            } else {
+                startSpeech();
+            }
+        }
+
+        function startSpeech() {
+            cancelSpeech(); // Stop any active audio before starting new
+
+            const lesson = curriculum[currentLessonIndex];
+            const audioPath = 'assets/lesson' + lesson.id + '.mp3';
+            
+            state.audioObject = new Audio(audioPath);
+            
+            state.audioObject.addEventListener('play', () => {
+                state.isSpeaking = true;
+                document.getElementById("speak-text").textContent = "Stop Listening";
+                document.getElementById("speak-icon").textContent = "⏹";
+                document.getElementById("wave-visualizer").classList.remove("hidden");
+                document.getElementById("wave-visualizer").classList.add("flex");
+                
+                const antenna = document.getElementById("bot-antenna");
+                if (antenna) {
+                    antenna.setAttribute("fill", "#a855f7"); // Purple glow
+                }
+            });
+
+            state.audioObject.addEventListener('ended', () => {
+                resetSpeechUI();
+            });
+
+            state.audioObject.addEventListener('pause', () => {
+                resetSpeechUI();
+            });
+
+            state.audioObject.addEventListener('error', (e) => {
+                console.error("Audio error:", e);
+                outf(`\n⚠️ Notice: Audio file "${audioPath}" could not be loaded. Please ensure the MP3 file is placed in the assets folder.\n`);
+                updateCompanionSpeech(`"Oh! I couldn't find the audio file!"`, "worried");
+                resetSpeechUI();
+            });
+
+            state.audioObject.play().catch(err => {
+                console.error("Playback failed:", err);
+                resetSpeechUI();
+            });
+        }
+
+        function cancelSpeech() {
+            if (state.audioObject) {
+                state.audioObject.pause();
+                state.audioObject.currentTime = 0; // Reset
+                state.audioObject = null;
+            }
+            resetSpeechUI();
+        }
+
+        function resetSpeechUI() {
+            state.isSpeaking = false;
+            document.getElementById("speak-text").textContent = "Listen to Story";
+            document.getElementById("speak-icon").textContent = "🔊";
+            document.getElementById("wave-visualizer").classList.add("hidden");
+            document.getElementById("wave-visualizer").classList.remove("flex");
+            
+            const antenna = document.getElementById("bot-antenna");
+            if (antenna) {
+                antenna.setAttribute("fill", "#fbbf24"); // Normal amber
+            }
+        }
+
+
+        // --- Python execution sandbox (Skulpt) ---
+        function clearTerminal() {
+            document.getElementById("terminal-body").textContent = "";
+        }
+
+        function outf(text) {
+            const term = document.getElementById("terminal-body");
+            term.textContent += text;
+            
+            const wrapper = document.getElementById("terminal-wrapper");
+            wrapper.scrollTop = wrapper.scrollHeight;
+        }
+
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined) {
+                throw "File not found: '" + x + "'";
+            }
+            return Sk.builtinFiles["files"][x];
+        }
+
+        // Custom Async Input Function
+        function inputf(promptText) {
+            const thisExecutionId = state.executionId;
+            
+            return new Promise((resolve, reject) => {
+                if (thisExecutionId !== state.executionId) {
+                    resolve("");
+                    return;
+                }
+
+                const term = document.getElementById("terminal-body");
+                
+                const promptSpan = document.createElement("span");
+                promptSpan.className = "text-amber-400 font-mono font-bold";
+                promptSpan.textContent = promptText;
+                term.appendChild(promptSpan);
+
+                const inputEl = document.createElement("input");
+                inputEl.type = "text";
+                inputEl.className = "bg-transparent border-b border-dashed border-emerald-500 text-emerald-300 font-mono font-bold focus:outline-none focus:ring-0 p-0 m-0 ml-1 inline-block w-48";
+                term.appendChild(inputEl);
+
+                const wrapper = document.getElementById("terminal-wrapper");
+                wrapper.scrollTop = wrapper.scrollHeight;
+
+                inputEl.focus();
+
+                inputEl.addEventListener("keydown", function(e) {
+                    if (e.key === "Enter") {
+                        const typedVal = inputEl.value;
+                        inputEl.remove();
+                        
+                        const printVal = document.createElement("span");
+                        printVal.className = "text-emerald-300 font-mono font-semibold";
+                        printVal.textContent = typedVal + "\n";
+                        term.appendChild(printVal);
+
+                        wrapper.scrollTop = wrapper.scrollHeight;
+                        
+                        resolve(typedVal);
+                    }
+                });
+            });
+        }
+
+        function focusTerminalInput() {
+            const activeInput = document.querySelector("#terminal-body input");
+            if (activeInput) {
+                activeInput.focus();
+            }
+        }
+
+        function runPython() {
+            const code = state.codeMirrorInstance.getValue();
+            clearTerminal();
+            closeErrorToast();
+
+            state.executionId++;
+            const currentExecId = state.executionId;
+
+            const runBtn = document.getElementById("run-btn");
+            runBtn.disabled = true;
+            runBtn.innerHTML = `<span>⏳</span> Running...`;
+
+            Sk.pre = "terminal-body";
+            
+            Sk.configure({
+                output: outf,
+                read: builtinRead,
+                inputfun: inputf,
+                inputfunTakesPrompt: true,
+                __future__: Sk.python3
+            });
+
+            const runPromise = Sk.misceval.asyncToPromise(() => {
+                return Sk.importMainWithBody("<stdin>", false, code, true);
+            });
+
+            runPromise.then((module) => {
+                runBtn.disabled = false;
+                runBtn.innerHTML = `▶ Run Code`;
+
+                if (currentExecId !== state.executionId) return;
+
+                if (module && module.$d) {
+                    const globals = {};
+                    for (let key in module.$d) {
+                        if (module.$d.hasOwnProperty(key)) {
+                            try {
+                                globals[key] = Sk.ffi.remapToJs(module.$d[key]);
+                            } catch (e) {
+                                // Skip complex objects
+                            }
+                        }
+                    }
+                    
+                    const activeLesson = curriculum[currentLessonIndex];
+                    if (activeLesson.successHook) {
+                        const feedback = activeLesson.successHook(globals, document.getElementById("terminal-body"));
+                        if (feedback) {
+                            updateCompanionSpeech(feedback);
+                            outf(`\n✨ Success: ${feedback.replace(/⚙️|🏆/g, '')}\n`);
+                        }
+                    }
+                }
+
+                const termBodyText = document.getElementById("terminal-body").textContent.trim();
+                if (termBodyText === "") {
+                    outf("🟢 Code executed successfully! (No output was printed)\n");
+                }
+
+            }, (err) => {
+                runBtn.disabled = false;
+                runBtn.innerHTML = `▶ Run Code`;
+
+                if (currentExecId !== state.executionId) return;
+                
+                const rawError = err.toString();
+                displayKidFriendlyError(rawError);
+            });
+        }
+
+        // Kid-Friendly Error Interceptor
+        function displayKidFriendlyError(rawError) {
+            const toast = document.getElementById("error-toast");
+            const errorMsgEl = document.getElementById("error-message");
+            const errorTipEl = document.getElementById("error-tip");
+
+            let simplifiedError = rawError;
+            let tip = "Double check spelling, quotes, and punctuation! Or click 'Reset' to restore the starter code.";
+
+            if (rawError.includes("SyntaxError") || rawError.includes("ParseError")) {
+                simplifiedError = "A typo or a missing symbol (like a comma, parenthesis, or quote mark) is blocking the machine.";
+                tip = "Look at the brackets () or quotes \"\" in your code! Make sure every open symbol has a matching close symbol.";
+            } else if (rawError.includes("NameError")) {
+                const match = rawError.match(/name '(\w+)' is not defined/);
+                const name = match ? `'${match[1]}'` : "a variable name";
+                simplifiedError = `You used ${name} before creating it! The workshop storage cupboard has no record of it.`;
+                tip = "Make sure you spelled your variable exactly the same way. Remember, Python cares about CAPITAL and lowercase letters!";
+            } else if (rawError.includes("TypeError")) {
+                simplifiedError = "You tried to mix two things that don't belong together (like adding a word to a number).";
+                tip = "In Python, words must be inside quotes \"\", and numbers must be plain. You can't add words and numbers directly!";
+            } else if (rawError.includes("IndexError")) {
+                simplifiedError = "You're trying to open a drawer that doesn't exist in your storage list!";
+                tip = "Check your index number. Remember, lists start at 0, so a list with 3 items has drawers 0, 1, and 2. Drawers like 3 or 4 will crash!";
+            } else if (rawError.includes("KeyError")) {
+                simplifiedError = "You asked for an inventory item that is not stored in your dictionary!";
+                tip = "Double-check the spelling of the key inside your dictionary brackets, like inventory['iron']. Make sure it exists!";
+            } else if (rawError.includes("ZeroDivisionError")) {
+                simplifiedError = "You cannot divide a number by zero! Cog-Bot's math calculator has overheated!";
+                tip = "Make sure the divisor number is not zero. Division by zero is a mathematical paradox!";
+            } else if (rawError.includes("IndentationError")) {
+                simplifiedError = "Your indentation spacings are misaligned! Python is very picky about spacing.";
+                tip = "Check the lines under 'if', 'elif', 'else', 'for', 'while', or 'def'. They must be indented with 4 spaces (or a tab)!";
+            }
+
+            errorMsgEl.innerHTML = `❌ Mistake in the recipe:<br><span class="text-rose-200">${rawError.split(':')[0]}: ${simplifiedError}</span>`;
+            errorTipEl.innerHTML = tip;
+
+            updateCompanionSpeech(`"Oh no! A small logic jam! Let's solve it!"`, "worried");
+
+            toast.classList.remove("translate-y-24", "opacity-0", "pointer-events-none");
+            toast.classList.add("translate-y-0", "opacity-100");
+        }
+
+        function closeErrorToast() {
+            const toast = document.getElementById("error-toast");
+            toast.classList.add("translate-y-24", "opacity-0", "pointer-events-none");
+            toast.classList.remove("translate-y-0", "opacity-100");
+        }
+
+        // --- Companion Speech Bubbles ---
+        function updateCompanionSpeech(text, mood = "happy") {
+            const bubble = document.getElementById("bot-bubble");
+            const eyes = document.getElementById("bot-eyes");
+            const mouth = document.getElementById("bot-mouth");
+
+            if (bubble) bubble.textContent = text;
+
+            if (eyes && mouth) {
+                if (mood === "worried") {
+                    eyes.setAttribute("fill", "#ef4444"); 
+                    mouth.setAttribute("d", "M40 65 Q50 60 60 65"); 
+                } else if (mood === "happy") {
+                    eyes.setAttribute("fill", "#fbbf24"); 
+                    mouth.setAttribute("d", "M40 63 Q50 67 60 63"); 
+                }
+            }
+        }
+
+        // --- Pilot Profile Updating ---
+        function updatePilotBadge() {
+            const badge = document.getElementById("pilot-badge");
+            const badgeText = document.getElementById("pilot-name-text");
+            const gradText = document.getElementById("grad-pilot-name");
+            
+            if (state.pilotName && state.pilotName !== "Guest Inventor") {
+                if (badge) badge.classList.remove("hidden");
+                if (badgeText) badgeText.textContent = state.pilotName;
+                if (gradText) gradText.textContent = state.pilotName;
+            }
+        }
+
+        // --- Graduation Screen ---
+        function showGradModal() {
+            const gradText = document.getElementById("grad-pilot-name");
+            if (gradText) gradText.textContent = state.pilotName;
+
+            const modal = document.getElementById("grad-modal");
+            if (modal) modal.classList.remove("hidden");
+            
+            updateCompanionSpeech(`"HURRAY! You graduated! Look at your license!"`);
+        }
+
+        function closeGradModal() {
+            const modal = document.getElementById("grad-modal");
+            if (modal) modal.classList.add("hidden");
+        }
+    </script>
+</body>
+</html>
