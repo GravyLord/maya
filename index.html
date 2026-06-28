@@ -10,21 +10,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=JetBrains+Mono:wght@100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        display: ['Fredoka', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Static CSS (replaces Tailwind Play CDN) -->
+    <link rel="stylesheet" href="styles.css">
     
     <!-- CodeMirror CSS & JS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
@@ -35,113 +22,6 @@
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/skulpt-stdlib.js" type="text/javascript"></script>
 
-    <!-- Custom Theme Styling -->
-    <style>
-        /* Smooth Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a; /* slate-900 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155; /* slate-700 */
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #475569; /* slate-600 */
-        }
-
-        /* Custom CodeMirror Theme Overrides */
-        .CodeMirror {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 15px;
-            height: 100% !important;
-            background: #090d16 !important; /* Premium dark slate */
-            color: #cbd5e1; /* slate-300 */
-        }
-        .CodeMirror-gutters {
-            background: #05070c !important;
-            border-right: 1px solid #1e293b !important; /* slate-800 */
-        }
-        .CodeMirror-linenumber {
-            color: #475569 !important; /* slate-600 */
-            padding-left: 8px;
-        }
-        .cm-s-custom-theme .cm-keyword {
-            color: #c084fc !important; /* purple-400 (Logic) */
-            font-weight: bold;
-        }
-        .cm-s-custom-theme .cm-string {
-            color: #22d3ee !important; /* cyan-400 (Strings) */
-        }
-        .cm-s-custom-theme .cm-number {
-            color: #34d399 !important; /* emerald-400 (Numbers) */
-        }
-        .cm-s-custom-theme .cm-builtin {
-            color: #fbbf24 !important; /* amber-400 (System/Controls) */
-            font-weight: bold;
-        }
-        .cm-s-custom-theme .cm-comment {
-            color: #64748b !important; /* slate-500 */
-            font-style: italic;
-        }
-        .cm-s-custom-theme .cm-variable {
-            color: #e2e8f0 !important; /* slate-200 */
-        }
-        .cm-s-custom-theme .cm-operator {
-            color: #f43f5e !important; /* rose-500 */
-        }
-        .CodeMirror-cursor {
-            border-left: 2px solid #fbbf24 !important; /* amber-400 */
-        }
-        .CodeMirror-selected {
-            background: rgba(251, 191, 36, 0.15) !important; /* amber-400 selection */
-        }
-
-        /* Sound Wave Animation */
-        @keyframes soundwave {
-            0%, 100% { height: 4px; }
-            50% { height: 20px; }
-        }
-        .wave-bar {
-            width: 3px;
-            height: 4px;
-            background-color: #fbbf24; /* amber-400 */
-            border-radius: 2px;
-            animation: soundwave 1.2s ease-in-out infinite;
-            display: inline-block;
-        }
-        .wave-bar:nth-child(2) { animation-delay: 0.2s; }
-        .wave-bar:nth-child(3) { animation-delay: 0.4s; }
-        .wave-bar:nth-child(4) { animation-delay: 0.1s; }
-        .wave-bar:nth-child(5) { animation-delay: 0.3s; }
-
-        /* Cog-Bot Blink Animation */
-        @keyframes eye-blink {
-            0%, 95%, 100% { transform: scaleY(1); }
-            97% { transform: scaleY(0.1); }
-        }
-        .animate-blink {
-            animation: eye-blink 4s linear infinite;
-            transform-origin: center;
-        }
-
-        /* Custom glow styles */
-        .glow-amber {
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.15);
-        }
-        .glow-cyan {
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.15);
-        }
-        .glow-emerald {
-            box-shadow: 0 0 15px rgba(52, 211, 153, 0.15);
-        }
-        .glow-purple {
-            box-shadow: 0 0 15px rgba(192, 132, 252, 0.15);
-        }
-    </style>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans h-screen flex flex-col overflow-hidden select-none">
 
