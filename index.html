@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -135,7 +135,7 @@
             <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-5 shadow-xl flex flex-col gap-4">
                 <div class="flex items-center justify-between">
                     <h3 class="font-display font-bold text-lg text-slate-200 flex items-center gap-2">
-                        <span>📖</span> The Workshop Story
+                        <span>ðŸ“–</span> The Workshop Story
                     </h3>
                     <div class="flex items-center gap-2">
                         <!-- Wave visualizer shown when speaking -->
@@ -149,7 +149,7 @@
                         
                         <!-- Speak Button -->
                         <button id="speak-btn" onclick="toggleSpeech()" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 active:scale-95 transition-all">
-                            <span id="speak-icon">🔊</span>
+                            <span id="speak-icon">ðŸ”Š</span>
                             <span id="speak-text">Listen to Story</span>
                         </button>
                     </div>
@@ -161,7 +161,7 @@
                 
                 <!-- Mission Guidance -->
                 <div class="border-t border-slate-800/60 pt-3.5">
-                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">🚀 Your Mission</span>
+                    <span class="text-xs font-bold text-amber-400 uppercase tracking-wider block mb-2">ðŸš€ Your Mission</span>
                     <ul id="mission-list" class="text-xs text-slate-400 space-y-2 list-disc pl-4 font-medium leading-relaxed">
                         <!-- Dynamic guidelines -->
                     </ul>
@@ -171,7 +171,7 @@
             <!-- Navigation Controls Card -->
             <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 shadow-xl flex items-center justify-between mt-auto">
                 <button id="prev-btn" onclick="prevLesson()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700/80 text-slate-300 font-bold text-sm rounded-xl disabled:opacity-30 disabled:pointer-events-none active:scale-95 transition-all flex items-center gap-2">
-                    ← Back
+                    â† Back
                 </button>
 
                 <!-- Indicator dots -->
@@ -180,7 +180,7 @@
                 </div>
 
                 <button id="next-btn" onclick="nextLesson()" class="px-5 py-2.5 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm rounded-xl active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-amber-500/10">
-                    Next Lesson →
+                    Next Lesson â†’
                 </button>
             </div>
 
@@ -201,20 +201,20 @@
                             <span class="w-3.5 h-3.5 rounded-full bg-emerald-500/80"></span>
                         </span>
                         <span class="text-xs font-bold text-slate-400 uppercase tracking-widest font-mono flex items-center gap-2 ml-2">
-                            <span>🔧</span> Magic Recipe Book
+                            <span>ðŸ”§</span> Magic Recipe Book
                         </span>
                     </div>
                     
                     <!-- Run Controls -->
                     <div class="flex items-center gap-3">
                         <button onclick="showHint()" id="hint-btn" class="px-3.5 py-1.5 bg-cyan-500/90 hover:bg-cyan-400 text-slate-950 font-bold text-xs rounded-xl active:scale-95 transition-all flex items-center gap-1.5 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/25 border border-cyan-400/20">
-                            💡 Hint
+                            ðŸ’¡ Hint
                         </button>
                         <button onclick="resetCode()" class="px-3.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs rounded-xl active:scale-95 transition-all flex items-center gap-1.5">
-                            🔄 Reset
+                            ðŸ”„ Reset
                         </button>
                         <button onclick="runPython()" id="run-btn" class="px-5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs rounded-xl flex items-center gap-1.5 active:scale-95 transition-all shadow-lg shadow-amber-500/10 hover:shadow-amber-500/25 border border-amber-400/20">
-                            ▶ Run Code
+                            â–¶ Run Code
                         </button>
                     </div>
                 </div>
@@ -248,7 +248,7 @@
                     </div>
                     <div class="min-w-0 flex-1">
                         <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest block">Cog-Bot</span>
-                        <span id="bot-bubble" class="text-xs text-slate-300 font-semibold italic font-medium">"I'm ready, Master Inventor! Tap 💡 Hint if you get stuck."</span>
+                        <span id="bot-bubble" class="text-xs text-slate-300 font-semibold italic font-medium">"I'm ready, Master Inventor! Tap ðŸ’¡ Hint if you get stuck."</span>
                     </div>
                 </div>
             </div>
@@ -260,7 +260,7 @@
                 <div class="bg-slate-900/90 border-b border-slate-800/80 px-4 py-2.5 flex items-center justify-between shrink-0">
                     <div class="flex items-center gap-2">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">📟 Workshop Console Output</span>
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">ðŸ“Ÿ Workshop Console Output</span>
                     </div>
                     <button onclick="clearTerminal()" class="px-2.5 py-1 text-[10px] bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 rounded-md font-bold transition-colors">
                         Clear
@@ -287,10 +287,10 @@
                 </svg>
             </div>
             <div class="flex-1">
-                <h4 class="font-display font-extrabold text-base tracking-wide text-white">❌ Mistake in the recipe:</h4>
+                <h4 class="font-display font-extrabold text-base tracking-wide text-white">âŒ Mistake in the recipe:</h4>
                 <p id="error-message" class="text-xs text-rose-100 font-semibold font-mono leading-relaxed mt-1 mb-2"></p>
                 <div class="bg-black/25 rounded-lg p-2.5 border border-rose-500/20 text-[11px] leading-relaxed">
-                    <span class="font-bold text-amber-300">🔧 Assistant Tip:</span>
+                    <span class="font-bold text-amber-300">ðŸ”§ Assistant Tip:</span>
                     <span id="error-tip" class="text-slate-200">Double check spelling, quotes, and punctuation! Or restore starter code.</span>
                 </div>
             </div>
@@ -341,7 +341,7 @@
                     Close
                 </button>
                 <button onclick="window.print()" class="flex-1 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm rounded-xl transition-all active:scale-95 shadow-lg shadow-amber-500/15">
-                    🖨️ Print
+                    ðŸ–¨ï¸ Print
                 </button>
             </div>
         </div>
@@ -353,61 +353,61 @@
         const curriculum = [
             {
                 id: 1,
-                module: "📦 Module 1: The Workshop Foundations",
+                module: "ðŸ“¦ Module 1: The Workshop Foundations",
                 title: "The print() Command",
                 concept: "Displaying Messages",
                 conceptType: "amber",
                 conceptDesc: "Telling the computer to show text on the screen.",
-                image: "assets/lesson1.png",
-                voiceText: "Welcome to the workshop! Coding isn't mystery magic—it's just a recipe book of clear instructions. When Maya types a command like 'print' into the magic book, the workshop listens and makes things happen. Try running the code to say hello to Cog-Bot!",
+                image: "assets/lesson1.webp",
+                voiceText: "Welcome to the workshop! Coding isn't mystery magicâ€”it's just a recipe book of clear instructions. When Maya types a command like 'print' into the magic book, the workshop listens and makes things happen. Try running the code to say hello to Cog-Bot!",
                 code: `print("Hello, Cog-Bot!")`,
                 guidelines: [
                     "Use the <code>print()</code> command to make the workshop show a message on screen.",
-                    "Whatever you put between the quote marks is what gets displayed — write your own greeting to Cog-Bot!",
-                    "Click the amber <b>▶ Run Code</b> button and check the console."
+                    "Whatever you put between the quote marks is what gets displayed â€” write your own greeting to Cog-Bot!",
+                    "Click the amber <b>â–¶ Run Code</b> button and check the console."
                 ],
                 hints: [
                     "The command that shows text is five letters and ends in brackets.",
                     "Try print( ) and put your message between quote marks inside the brackets."
                 ],
                 successHook: (globals, terminal) => {
-                    return "⚙️ Cog-Bot says: 'Hello! I am boot-completed and ready for orders!'";
+                    return "âš™ï¸ Cog-Bot says: 'Hello! I am boot-completed and ready for orders!'";
                 }
             },
             {
                 id: 2,
-                module: "📦 Module 1: The Workshop Foundations",
+                module: "ðŸ“¦ Module 1: The Workshop Foundations",
                 title: "String Variables",
                 concept: "String Variables",
                 conceptType: "cyan",
                 conceptDesc: "Storing words inside labeled memory containers.",
-                image: "assets/lesson2.png",
+                image: "assets/lesson2.webp",
                 voiceText: "To help our robot remember things, Maya uses magic storage boxes called variables. Each box gets a clear label and stores one piece of information, like a name. Let's see what name is currently inside our box!",
                 code: `robot_name = "Cog-Bot"\nprint("The robot's name is:")\nprint(robot_name)`,
                 guidelines: [
                     "Make a box called <code>robot_name</code> and store a name inside it with the <code>=</code> sign. Words always go between quote marks.",
                     "On the next line, <code>print()</code> the box label with <b>no</b> quotes to reveal what is inside it.",
-                    "Run it. Then store a different name and run again — the box updates!"
+                    "Run it. Then store a different name and run again â€” the box updates!"
                 ],
                 hints: [
                     "Make the box first, then on a new line ask Python to show what's inside it.",
-                    "robot_name = \"...\"  then on the next line  print(robot_name)  — no quotes around the box name when printing."
+                    "robot_name = \"...\"  then on the next line  print(robot_name)  â€” no quotes around the box name when printing."
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.robot_name) {
-                        return `⚙️ Cog-Bot says: 'Beep! My system name has been updated to "${globals.robot_name}"!'`;
+                        return `âš™ï¸ Cog-Bot says: 'Beep! My system name has been updated to "${globals.robot_name}"!'`;
                     }
                     return null;
                 }
             },
             {
                 id: 3,
-                module: "📦 Module 1: The Workshop Foundations",
+                module: "ðŸ“¦ Module 1: The Workshop Foundations",
                 title: "Number Variables & Math",
                 concept: "Number Variables & Math",
                 conceptType: "emerald",
                 conceptDesc: "Storing integers and using operators (+, -, *, /) for calculations.",
-                image: "assets/lesson3.png",
+                image: "assets/lesson3.webp",
                 voiceText: "Variables can store numbers too! Maya can count her spare parts and use math to see how many total pieces she has available. Let's add our storage boxes together.",
                 code: `box_a = 10\nbox_b = 5\ntotal_bolts = box_a + box_b\nprint("Total bolts in workshop:")\nprint(total_bolts)`,
                 guidelines: [
@@ -421,53 +421,53 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.total_bolts !== undefined) {
-                        return `⚙️ Cog-Bot says: 'Math engine verified! Total bolt count calculated: ${globals.total_bolts}!'`;
+                        return `âš™ï¸ Cog-Bot says: 'Math engine verified! Total bolt count calculated: ${globals.total_bolts}!'`;
                     }
                     return null;
                 }
             },
             {
                 id: 4,
-                module: "📦 Module 1: The Workshop Foundations",
+                module: "ðŸ“¦ Module 1: The Workshop Foundations",
                 title: "User Input",
                 concept: "User Input",
                 conceptType: "amber",
                 conceptDesc: "Pausing the program to let the user type information.",
-                image: "assets/lesson4.png",
+                image: "assets/lesson4.webp",
                 voiceText: "Let's make the code a two-way street. We can use the 'input' command to talk directly to the program while it runs. Type your name into the box when it asks!",
                 code: `pilot_name = input("Enter your name, Pilot: ")\nprint("Welcome to the control center, " + pilot_name)`,
                 guidelines: [
-                    "Use <code>input()</code> to ask a question — the words inside become the prompt the user sees — and store the answer in a box.",
+                    "Use <code>input()</code> to ask a question â€” the words inside become the prompt the user sees â€” and store the answer in a box.",
                     "Then <code>print()</code> a welcome that joins your own text and the answer box together with <code>+</code>.",
                     "Run it, type your name, press <b>Enter</b>, and watch the header update!"
                 ],
                 hints: [
-                    "input() asks the question AND hands back the answer — catch it in a box.",
+                    "input() asks the question AND hands back the answer â€” catch it in a box.",
                     "name = input(\"...\")  then  print(\"Welcome \" + name)."
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.pilot_name) {
                         state.pilotName = globals.pilot_name;
                         updatePilotBadge();
-                        return `⚙️ Cog-Bot says: 'Welcome aboard, Pilot ${globals.pilot_name}! Profile loaded!'`;
+                        return `âš™ï¸ Cog-Bot says: 'Welcome aboard, Pilot ${globals.pilot_name}! Profile loaded!'`;
                     }
                     return null;
                 }
             },
             {
                 id: 5,
-                module: "🚦 Module 2: Making Decisions",
+                module: "ðŸš¦ Module 2: Making Decisions",
                 title: "Simple IF Statements",
                 concept: "Simple IF Statements",
                 conceptType: "purple",
                 conceptDesc: "Running a block of code only if a specific condition is True.",
-                image: "assets/lesson5.png",
+                image: "assets/lesson5.webp",
                 voiceText: "An 'if' statement is like a mechanical switch. If the condition is true, the code inside runs. If it's false, the computer completely skips it! Try changing True to False to see what happens.",
-                code: `switch_on = True\nif switch_on == True:\n    print("💡 The workshop lights turn on!")`,
+                code: `switch_on = True\nif switch_on == True:\n    print("ðŸ’¡ The workshop lights turn on!")`,
                 guidelines: [
                     "Make a box set to <code>True</code> or <code>False</code>.",
                     "Write an <code>if</code> statement that checks the box. The line underneath must be indented <b>4 spaces</b>.",
-                    "Run it. Then flip the value and run again — what changes?"
+                    "Run it. Then flip the value and run again â€” what changes?"
                 ],
                 hints: [
                     "An if needs a colon at the end, and its action goes on the next line pushed in 4 spaces.",
@@ -475,21 +475,21 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.switch_on === false) {
-                        return "⚙️ Cog-Bot whispers: 'The switch is Off. The console is dark. Perfect for sleeping!'";
+                        return "âš™ï¸ Cog-Bot whispers: 'The switch is Off. The console is dark. Perfect for sleeping!'";
                     }
-                    return "⚙️ Cog-Bot says: 'Bzzzt! The switch is On, lights are glowing!'";
+                    return "âš™ï¸ Cog-Bot says: 'Bzzzt! The switch is On, lights are glowing!'";
                 }
             },
             {
                 id: 6,
-                module: "🚦 Module 2: Making Decisions",
+                module: "ðŸš¦ Module 2: Making Decisions",
                 title: "ELSE and ELIF Chains",
                 concept: "ELSE and ELIF Chains",
                 conceptType: "purple",
                 conceptDesc: "Handling multiple alternative choices in decision making.",
-                image: "assets/lesson6.png",
+                image: "assets/lesson6.webp",
                 voiceText: "What if a switch has more than two choices? We can use 'elif' and 'else' to create a multi-track railway for our logic to follow based on battery levels.",
-                code: `battery_level = 20\n\nif battery_level > 70:\n    print("🔋 Battery is full!")\nelif battery_level > 30:\n    print("⚠️ Battery is getting low.")\nelse:\n    print("🚨 Battery dead! Plug in immediately!")`,
+                code: `battery_level = 20\n\nif battery_level > 70:\n    print("ðŸ”‹ Battery is full!")\nelif battery_level > 30:\n    print("âš ï¸ Battery is getting low.")\nelse:\n    print("ðŸš¨ Battery dead! Plug in immediately!")`,
                 guidelines: [
                     "Start with a <code>battery_level</code> number, then build an <code>if</code> / <code>elif</code> / <code>else</code> chain with a different message for full, low, and dead.",
                     "Choose your own cut-off numbers using <code>&gt;</code>, and indent each message <b>4 spaces</b>.",
@@ -501,23 +501,23 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.battery_level !== undefined) {
-                        return `⚙️ Cog-Bot says: 'Battery level analyzed at ${globals.battery_level}%. Current state simulated.'`;
+                        return `âš™ï¸ Cog-Bot says: 'Battery level analyzed at ${globals.battery_level}%. Current state simulated.'`;
                     }
                     return null;
                 }
             },
             {
                 id: 7,
-                module: "🚦 Module 2: Making Decisions",
+                module: "ðŸš¦ Module 2: Making Decisions",
                 title: "Complex Logic (AND)",
                 concept: "Complex Logic (AND)",
                 conceptType: "purple",
                 conceptDesc: "Combining multiple conditions using the 'and' operator.",
-                image: "assets/lesson7.png",
+                image: "assets/lesson7.webp",
                 voiceText: "Sometimes multiple conditions must be true at once. We use the word 'and' to connect them. Let's see if we have enough parts to unlock our flying drone blueprint!",
-                code: `has_metal = True\nbolt_count = 12\n\nif has_metal == True and bolt_count >= 10:\n    print("🚀 Blueprint unlocked! Building drone.")\nelse:\n    print("❌ Missing parts.")`,
+                code: `has_metal = True\nbolt_count = 12\n\nif has_metal == True and bolt_count >= 10:\n    print("ðŸš€ Blueprint unlocked! Building drone.")\nelse:\n    print("âŒ Missing parts.")`,
                 guidelines: [
-                    "Make two conditions — one True/False box and one number box.",
+                    "Make two conditions â€” one True/False box and one number box.",
                     "Combine them in a single <code>if</code> using the word <code>and</code> (both must be true to pass), and add an <code>else</code> for when parts are missing.",
                     "Run it, then lower the bolt number and watch it fail."
                 ],
@@ -527,24 +527,24 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.has_metal && globals.bolt_count >= 10) {
-                        return "⚙️ Cog-Bot says: 'Vault opened! Construction of the hover-drone has begun!'";
+                        return "âš™ï¸ Cog-Bot says: 'Vault opened! Construction of the hover-drone has begun!'";
                     }
-                    return "⚙️ Cog-Bot sighs: 'Vault remains locked. Fetch more bolts from the workshop shelves!'";
+                    return "âš™ï¸ Cog-Bot sighs: 'Vault remains locked. Fetch more bolts from the workshop shelves!'";
                 }
             },
             {
                 id: 8,
-                module: "🔄 Module 3: Storage & Loops",
+                module: "ðŸ”„ Module 3: Storage & Loops",
                 title: "Python Lists",
                 concept: "Python Lists",
                 conceptType: "cyan",
                 conceptDesc: "Storing multiple indexed items inside a single variable container.",
-                image: "assets/lesson8.png",
+                image: "assets/lesson8.webp",
                 voiceText: "Instead of creating a separate box for every single item, we can use a list to store a whole row of tools inside one single variable cupboard!",
                 code: `tools = ["Hammer", "Wrench", "Pliers"]\nprint("The item in drawer 0 is:")\nprint(tools[0])`,
                 guidelines: [
                     "Make a list using square brackets <code>[ ]</code> with items separated by commas.",
-                    "Print one item using its drawer number in brackets — remember, drawer counting starts at <b>0</b>.",
+                    "Print one item using its drawer number in brackets â€” remember, drawer counting starts at <b>0</b>.",
                     "Run it, then try printing drawer 1 and drawer 2."
                 ],
                 hints: [
@@ -553,69 +553,69 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.tools) {
-                        return `⚙️ Cog-Bot says: 'Inventory scanned! We have ${globals.tools.length} tools stored inside the toolbox!'`;
+                        return `âš™ï¸ Cog-Bot says: 'Inventory scanned! We have ${globals.tools.length} tools stored inside the toolbox!'`;
                     }
                     return null;
                 }
             },
             {
                 id: 9,
-                module: "🔄 Module 3: Storage & Loops",
+                module: "ðŸ”„ Module 3: Storage & Loops",
                 title: "FOR Loops",
                 concept: "FOR Loops",
                 conceptType: "purple",
                 conceptDesc: "Iterating through each item in a list sequentially.",
-                image: "assets/lesson9.png",
+                image: "assets/lesson9.webp",
                 voiceText: "A for loop lets us look at every single item inside a list automatically. The computer loops down the line so you don't have to write the print command over and over again.",
                 code: `tools = ["Hammer", "Wrench", "Pliers"]\nfor item in tools:\n    print("Scanning tool: " + item)`,
                 guidelines: [
                     "Make a list of tools, then write a <code>for</code> loop that visits each item one at a time. Pattern: <code>for thing in mylist:</code>",
                     "Inside the loop (indented <b>4 spaces</b>), print each item.",
-                    "Run it, then add a fourth tool to the list — the loop handles it automatically."
+                    "Run it, then add a fourth tool to the list â€” the loop handles it automatically."
                 ],
                 hints: [
                     "A for loop borrows each item one at a time into a temporary name.",
                     "for item in tools:  /  (4 spaces) print(item)."
                 ],
                 successHook: (globals, terminal) => {
-                    return "⚙️ Cog-Bot says: 'Scanner routine complete. All tools registered in system memory!'";
+                    return "âš™ï¸ Cog-Bot says: 'Scanner routine complete. All tools registered in system memory!'";
                 }
             },
             {
                 id: 10,
-                module: "🔄 Module 3: Storage & Loops",
+                module: "ðŸ”„ Module 3: Storage & Loops",
                 title: "WHILE Loops",
                 concept: "WHILE Loops",
                 conceptType: "purple",
                 conceptDesc: "Repeating a code block continuously as long as a condition remains True.",
-                image: "assets/lesson10.png",
+                image: "assets/lesson10.webp",
                 voiceText: "A while loop is like an engine that runs forever as long as its fuel switch stays True. We can use this to keep our program running non-stop!",
-                code: `fuel = 3\nwhile fuel > 0:\n    print("⚙️ Engine running! Fuel left:", fuel)\n    fuel = fuel - 1\nprint("🛑 Out of fuel. Stopping.")`,
+                code: `fuel = 3\nwhile fuel > 0:\n    print("âš™ï¸ Engine running! Fuel left:", fuel)\n    fuel = fuel - 1\nprint("ðŸ›‘ Out of fuel. Stopping.")`,
                 guidelines: [
                     "Start with a fuel number, then write a <code>while</code> loop that runs <i>while</i> fuel is greater than 0.",
-                    "Inside the loop: print the fuel, then subtract 1 from it — forget this and it loops forever!",
+                    "Inside the loop: print the fuel, then subtract 1 from it â€” forget this and it loops forever!",
                     "Run it, then start with more fuel and watch the engine run longer."
                 ],
                 hints: [
-                    "while keeps looping while the test is true — so something inside MUST change, or it never stops.",
+                    "while keeps looping while the test is true â€” so something inside MUST change, or it never stops.",
                     "fuel = 3  /  while fuel > 0:  /  (4 spaces) print(fuel)  /  (4 spaces) fuel = fuel - 1."
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.fuel !== undefined) {
-                        return "⚙️ Cog-Bot says: 'Engine test complete! Fuel is fully consumed, stopping rotors safely.'";
+                        return "âš™ï¸ Cog-Bot says: 'Engine test complete! Fuel is fully consumed, stopping rotors safely.'";
                     }
                     return null;
                 }
             },
             {
                 id: 15,
-                module: "🔄 Module 3: Storage & Loops",
+                module: "ðŸ”„ Module 3: Storage & Loops",
                 title: "Dictionaries",
                 concept: "Labeled Storage",
                 conceptType: "cyan",
                 conceptDesc: "Storing values you look up by a name (a label) instead of by number.",
-                image: "assets/dictionaries.png",
-                voiceText: "A list uses numbered drawers, but a dictionary uses labeled jars. Maya writes a label on each jar — like 'iron' or 'copper' — and stores a count inside. To check a jar, she just asks for it by its label!",
+                image: "assets/dictionaries.webp",
+                voiceText: "A list uses numbered drawers, but a dictionary uses labeled jars. Maya writes a label on each jar â€” like 'iron' or 'copper' â€” and stores a count inside. To check a jar, she just asks for it by its label!",
                 code: ``,
                 guidelines: [
                     "Make a dictionary with curly brackets <code>{ }</code>. Each entry is a label and a value, like <code>\"iron\": 15</code>, separated by commas.",
@@ -628,97 +628,97 @@
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.materials) {
-                        return "⚙️ Cog-Bot says: 'Labeled jars catalogued! I can find any material by name now!'";
+                        return "âš™ï¸ Cog-Bot says: 'Labeled jars catalogued! I can find any material by name now!'";
                     }
                     return null;
                 }
             },
             {
                 id: 11,
-                module: "🛠️ Module 4: Blueprints & Functions",
+                module: "ðŸ› ï¸ Module 4: Blueprints & Functions",
                 title: "Simple Functions",
                 concept: "Simple Functions",
                 conceptType: "amber",
                 conceptDesc: "Bundling code blocks into reusable names using 'def'.",
-                image: "assets/lesson11.png",
+                image: "assets/lesson11.webp",
                 voiceText: "Functions are custom blueprints. You group a collection of commands together under one short name, so you can perform a complex task instantly anywhere in your code.",
-                code: `def boot_system():\n    print("Initializing Core...")\n    print("Waking up Cog-Bot...")\n    print("🟢 System Ready!")\n\nboot_system()`,
+                code: `def boot_system():\n    print("Initializing Core...")\n    print("Waking up Cog-Bot...")\n    print("ðŸŸ¢ System Ready!")\n\nboot_system()`,
                 guidelines: [
                     "Use <code>def</code> to create a blueprint named <code>boot_system()</code>, with a few <code>print()</code> lines inside (indented <b>4 spaces</b>).",
                     "Below the blueprint, with <b>no</b> indent, <i>call</i> it by writing its name followed by <code>()</code>.",
-                    "Run it, then call it twice — does it boot twice?"
+                    "Run it, then call it twice â€” does it boot twice?"
                 ],
                 hints: [
                     "def names the blueprint; lines inside are indented. Nothing runs until you call the name.",
                     "def boot_system():  /  (4 spaces) print(\"...\")  /  then on its own line: boot_system()."
                 ],
                 successHook: (globals, terminal) => {
-                    return "⚙️ Cog-Bot says: 'Bzzzzt... systems activated! Diagnostics green! Function works!'";
+                    return "âš™ï¸ Cog-Bot says: 'Bzzzzt... systems activated! Diagnostics green! Function works!'";
                 }
             },
             {
                 id: 12,
-                module: "🛠️ Module 4: Blueprints & Functions",
+                module: "ðŸ› ï¸ Module 4: Blueprints & Functions",
                 title: "Functions with Inputs",
                 concept: "Functions with Inputs",
                 conceptType: "emerald",
                 conceptDesc: "Passing external arguments into functions to alter their calculations.",
-                image: "assets/lesson12.png",
+                image: "assets/lesson12.webp",
                 voiceText: "We can pass data into our functions to customize how the blueprint works. Watch how the same function gives different results based on the number we feed it!",
                 code: `def calculate_gears(iron):\n    gear_count = iron * 3\n    print("Gears made:", gear_count)\n\ncalculate_gears(5)`,
                 guidelines: [
                     "Make a function with a value in its brackets, like <code>def make_gears(iron):</code>. Inside, do some math with that value and print the result.",
                     "Call your function with a number, such as <code>make_gears(5)</code>.",
-                    "Run it, then call it again with a bigger number — same blueprint, new result."
+                    "Run it, then call it again with a bigger number â€” same blueprint, new result."
                 ],
                 hints: [
-                    "Put a name in the brackets of def — that's the value you hand in when you call it.",
+                    "Put a name in the brackets of def â€” that's the value you hand in when you call it.",
                     "def make_gears(iron):  /  (4 spaces) print(iron * 3)  /  make_gears(5)."
                 ],
                 successHook: (globals, terminal) => {
-                    return "⚙️ Cog-Bot says: 'Output calculated! Gears stamped. Processing conveyor belt is clear.'";
+                    return "âš™ï¸ Cog-Bot says: 'Output calculated! Gears stamped. Processing conveyor belt is clear.'";
                 }
             },
             {
                 id: 13,
-                module: "🏁 Module 5: Graduation Projects",
+                module: "ðŸ Module 5: Graduation Projects",
                 title: "Capstone Crafting Calculator",
                 concept: "Capstone Calculator",
                 conceptType: "purple",
                 conceptDesc: "Combining loops, conditionals, variables, and dict structures into an interactive terminal app.",
-                image: "assets/lesson13.png",
+                image: "assets/lesson13.webp",
                 voiceText: "Time for your final challenge! You are going to build a continuous command center using a loop. It keeps track of workshop materials and lets you choose whether to check your inventory stock or craft an item.",
-                code: `inventory = {"iron": 15, "copper": 8}\n\ndef show_stock():\n    print("\\n📦 Iron:", inventory["iron"], "| Copper:", inventory["copper"])\n\nrunning = True\nwhile running:\n    show_stock()\n    action = input("Options: 1=Craft, 2=Exit -> ")\n    if action == "1":\n        if inventory["iron"] >= 5 and inventory["copper"] >= 4:\n            print("✨ Successfully crafted a drone component!")\n            inventory["iron"] -= 5\n            inventory["copper"] -= 4\n        else:\n            print("❌ Not enough materials!")\n    elif action == "2":\n        print("Goodbye, Master Engineer!")\n        running = False`,
+                code: `inventory = {"iron": 15, "copper": 8}\n\ndef show_stock():\n    print("\\nðŸ“¦ Iron:", inventory["iron"], "| Copper:", inventory["copper"])\n\nrunning = True\nwhile running:\n    show_stock()\n    action = input("Options: 1=Craft, 2=Exit -> ")\n    if action == "1":\n        if inventory["iron"] >= 5 and inventory["copper"] >= 4:\n            print("âœ¨ Successfully crafted a drone component!")\n            inventory["iron"] -= 5\n            inventory["copper"] -= 4\n        else:\n            print("âŒ Not enough materials!")\n    elif action == "2":\n        print("Goodbye, Master Engineer!")\n        running = False`,
                 guidelines: [
-                    "This combines everything you have learned — build it one block at a time and run often.",
+                    "This combines everything you have learned â€” build it one block at a time and run often.",
                     "<b>1.</b> Make a <code>dictionary</code> of materials with <code>{ }</code>, e.g. an iron count and a copper count.",
                     "<b>2.</b> Write a function that prints the current stock.",
                     "<b>3.</b> Write a <code>while</code> loop that shows the stock, asks the user to <code>input()</code> a choice, and uses <code>if</code> / <code>elif</code> to either craft (subtract materials) or exit (stop the loop).",
                     "Test option <b>1</b> to craft and option <b>2</b> to exit."
                 ],
                 hints: [
-                    "Build it in the 3 mission steps — dictionary, then a stock function, then the while loop. Run after each step.",
+                    "Build it in the 3 mission steps â€” dictionary, then a stock function, then the while loop. Run after each step.",
                     "Dictionary: materials = {\"iron\": 15, \"copper\": 8}. Subtract when crafting: materials[\"iron\"] = materials[\"iron\"] - 5. Stop the loop: set running to False."
                 ],
                 successHook: (globals, terminal) => {
                     if (globals.inventory) {
-                        return `⚙️ Cog-Bot cheers: 'Wow, dynamic system logic completed! Current inventory holds Iron: ${globals.inventory.iron}, Copper: ${globals.inventory.copper}!'`;
+                        return `âš™ï¸ Cog-Bot cheers: 'Wow, dynamic system logic completed! Current inventory holds Iron: ${globals.inventory.iron}, Copper: ${globals.inventory.copper}!'`;
                     }
                     return null;
                 }
             },
             {
                 id: 14,
-                module: "🏁 Module 5: Graduation Projects",
+                module: "ðŸ Module 5: Graduation Projects",
                 title: "Desktop Graduation",
                 concept: "Desktop Graduation (VS Code)",
                 conceptType: "amber",
                 conceptDesc: "Transitioning from the browser playground to a local Python interpreter and VS Code environment.",
-                image: "assets/lesson14.png",
+                image: "assets/lesson14.webp",
                 voiceText: "Congratulations! You have completed the browser training course. Now you're ready to use real professional tools on your computer. Follow the steps on your screen to download Python, install VS Code, and bring your code into the real world!",
                 code: `# Follow the interactive checklist on the screen to set up your environment!\nprint("Master Inventor Status: Achieved.")`,
                 guidelines: [
-                    "Use <code>print()</code> to announce that you have graduated — write the message in your own words!",
+                    "Use <code>print()</code> to announce that you have graduated â€” write the message in your own words!",
                     "Run it to unlock your Master Inventor license.",
                     "Then follow the desktop setup steps to install real Python and VS Code."
                 ],
@@ -728,7 +728,7 @@
                 ],
                 successHook: (globals, terminal) => {
                     showGradModal();
-                    return "🏆 Cog-Bot throws confetti! 'BEEP BOOP HURRAY! You graduated, Master Inventor!'";
+                    return "ðŸ† Cog-Bot throws confetti! 'BEEP BOOP HURRAY! You graduated, Master Inventor!'";
                 }
             }
         ];
@@ -837,10 +837,10 @@
 
         // Generate hands-on code editor comment prompt
         function getStarterCode(lesson) {
-            // Capstone: hand kids a commented skeleton instead of a blank editor —
+            // Capstone: hand kids a commented skeleton instead of a blank editor â€”
             // an 18-line synthesis task is too big a leap from one blank line.
             if (lesson.id === 13) {
-                return `# Lesson 13: Capstone — build it one block at a time, run after each step!
+                return `# Lesson 13: Capstone â€” build it one block at a time, run after each step!
 
 # Step 1: make a dictionary of materials (iron and copper counts)
 
@@ -955,16 +955,16 @@
                 
                 const nextBtn = document.getElementById("next-btn");
                 if (index === curriculum.length - 1) {
-                    nextBtn.textContent = "Graduation! 🏆";
+                    nextBtn.textContent = "Graduation! ðŸ†";
                 } else {
-                    nextBtn.textContent = "Next Lesson →";
+                    nextBtn.textContent = "Next Lesson â†’";
                 }
 
                 // Remove transition opacity
                 detailsCard.classList.remove("opacity-30");
                 
                 // Reset the companion to a friendly idle state (no passive status narration)
-                updateCompanionSpeech(`"Stuck on this one? Tap 💡 Hint and I'll nudge you."`);
+                updateCompanionSpeech(`"Stuck on this one? Tap ðŸ’¡ Hint and I'll nudge you."`);
 
             }, 200);
         }
@@ -1009,12 +1009,12 @@
         function showHint() {
             const lesson = curriculum[currentLessonIndex];
             if (!lesson.hints || lesson.hints.length === 0) {
-                updateCompanionSpeech(`"Hmm, no hints loaded for this one — give it your best shot!"`);
+                updateCompanionSpeech(`"Hmm, no hints loaded for this one â€” give it your best shot!"`);
                 return;
             }
 
             const idx = Math.min(state.hintIndex, lesson.hints.length - 1);
-            updateCompanionSpeech(`💡 ${lesson.hints[idx]}`);
+            updateCompanionSpeech(`ðŸ’¡ ${lesson.hints[idx]}`);
 
             // Advance toward the pattern-level hint, then stay there
             if (state.hintIndex < lesson.hints.length - 1) {
@@ -1042,7 +1042,7 @@
             state.audioObject.addEventListener('play', () => {
                 state.isSpeaking = true;
                 document.getElementById("speak-text").textContent = "Stop Listening";
-                document.getElementById("speak-icon").textContent = "⏹";
+                document.getElementById("speak-icon").textContent = "â¹";
                 document.getElementById("wave-visualizer").classList.remove("hidden");
                 document.getElementById("wave-visualizer").classList.add("flex");
                 
@@ -1062,7 +1062,7 @@
 
             state.audioObject.addEventListener('error', (e) => {
                 console.error("Audio error:", e);
-                outf(`\n⚠️ Notice: Audio file "${audioPath}" could not be loaded. Please ensure the MP3 file is placed in the assets folder.\n`);
+                outf(`\nâš ï¸ Notice: Audio file "${audioPath}" could not be loaded. Please ensure the MP3 file is placed in the assets folder.\n`);
                 updateCompanionSpeech(`"Oh! I couldn't find the audio file!"`, "worried");
                 resetSpeechUI();
             });
@@ -1085,7 +1085,7 @@
         function resetSpeechUI() {
             state.isSpeaking = false;
             document.getElementById("speak-text").textContent = "Listen to Story";
-            document.getElementById("speak-icon").textContent = "🔊";
+            document.getElementById("speak-icon").textContent = "ðŸ”Š";
             document.getElementById("wave-visualizer").classList.add("hidden");
             document.getElementById("wave-visualizer").classList.remove("flex");
             
@@ -1178,7 +1178,7 @@
 
             const runBtn = document.getElementById("run-btn");
             runBtn.disabled = true;
-            runBtn.innerHTML = `<span>⏳</span> Running...`;
+            runBtn.innerHTML = `<span>â³</span> Running...`;
 
             Sk.pre = "terminal-body";
             
@@ -1196,7 +1196,7 @@
 
             runPromise.then((module) => {
                 runBtn.disabled = false;
-                runBtn.innerHTML = `▶ Run Code`;
+                runBtn.innerHTML = `â–¶ Run Code`;
 
                 if (currentExecId !== state.executionId) return;
 
@@ -1217,19 +1217,19 @@
                         const feedback = activeLesson.successHook(globals, document.getElementById("terminal-body"));
                         if (feedback) {
                             updateCompanionSpeech(feedback);
-                            outf(`\n✨ Success: ${feedback.replace(/⚙️|🏆/g, '')}\n`);
+                            outf(`\nâœ¨ Success: ${feedback.replace(/âš™ï¸|ðŸ†/g, '')}\n`);
                         }
                     }
                 }
 
                 const termBodyText = document.getElementById("terminal-body").textContent.trim();
                 if (termBodyText === "") {
-                    outf("🟢 Code executed successfully! (No output was printed)\n");
+                    outf("ðŸŸ¢ Code executed successfully! (No output was printed)\n");
                 }
 
             }, (err) => {
                 runBtn.disabled = false;
-                runBtn.innerHTML = `▶ Run Code`;
+                runBtn.innerHTML = `â–¶ Run Code`;
 
                 if (currentExecId !== state.executionId) return;
                 
@@ -1272,7 +1272,7 @@
                 tip = "Check the lines under 'if', 'elif', 'else', 'for', 'while', or 'def'. They must be indented with 4 spaces (or a tab)!";
             }
 
-            errorMsgEl.innerHTML = `❌ Mistake in the recipe:<br><span class="text-rose-200">${rawError.split(':')[0]}: ${simplifiedError}</span>`;
+            errorMsgEl.innerHTML = `âŒ Mistake in the recipe:<br><span class="text-rose-200">${rawError.split(':')[0]}: ${simplifiedError}</span>`;
             errorTipEl.innerHTML = tip;
 
             updateCompanionSpeech(`"Oh no! A small logic jam! Let's solve it!"`, "worried");
@@ -1337,3 +1337,4 @@
     </script>
 </body>
 </html>
+
