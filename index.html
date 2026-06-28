@@ -581,7 +581,7 @@
                 concept: "Simple IF Statements",
                 conceptType: "purple",
                 conceptDesc: "Running a block of code only if a specific condition is True.",
-                image: null,
+                image: "assets/lesson5.png",
                 voiceText: "An 'if' statement is like a mechanical switch. If the condition is true, the code inside runs. If it's false, the computer completely skips it! Try changing True to False to see what happens.",
                 code: `switch_on = True\nif switch_on == True:\n    print("💡 The workshop lights turn on!")`,
                 guidelines: [
@@ -607,7 +607,7 @@
                 concept: "ELSE and ELIF Chains",
                 conceptType: "purple",
                 conceptDesc: "Handling multiple alternative choices in decision making.",
-                image: null,
+                image: "assets/lesson6.png",
                 voiceText: "What if a switch has more than two choices? We can use 'elif' and 'else' to create a multi-track railway for our logic to follow based on battery levels.",
                 code: `battery_level = 20\n\nif battery_level > 70:\n    print("🔋 Battery is full!")\nelif battery_level > 30:\n    print("⚠️ Battery is getting low.")\nelse:\n    print("🚨 Battery dead! Plug in immediately!")`,
                 guidelines: [
@@ -633,7 +633,7 @@
                 concept: "Complex Logic (AND)",
                 conceptType: "purple",
                 conceptDesc: "Combining multiple conditions using the 'and' operator.",
-                image: null,
+                image: "assets/lesson7.png",
                 voiceText: "Sometimes multiple conditions must be true at once. We use the word 'and' to connect them. Let's see if we have enough parts to unlock our flying drone blueprint!",
                 code: `has_metal = True\nbolt_count = 12\n\nif has_metal == True and bolt_count >= 10:\n    print("🚀 Blueprint unlocked! Building drone.")\nelse:\n    print("❌ Missing parts.")`,
                 guidelines: [
@@ -659,7 +659,7 @@
                 concept: "Python Lists",
                 conceptType: "cyan",
                 conceptDesc: "Storing multiple indexed items inside a single variable container.",
-                image: null,
+                image: "assets/lesson8.png",
                 voiceText: "Instead of creating a separate box for every single item, we can use a list to store a whole row of tools inside one single variable cupboard!",
                 code: `tools = ["Hammer", "Wrench", "Pliers"]\nprint("The item in drawer 0 is:")\nprint(tools[0])`,
                 guidelines: [
@@ -685,7 +685,7 @@
                 concept: "FOR Loops",
                 conceptType: "purple",
                 conceptDesc: "Iterating through each item in a list sequentially.",
-                image: null,
+                image: "assets/lesson9.png",
                 voiceText: "A for loop lets us look at every single item inside a list automatically. The computer loops down the line so you don't have to write the print command over and over again.",
                 code: `tools = ["Hammer", "Wrench", "Pliers"]\nfor item in tools:\n    print("Scanning tool: " + item)`,
                 guidelines: [
@@ -708,7 +708,7 @@
                 concept: "WHILE Loops",
                 conceptType: "purple",
                 conceptDesc: "Repeating a code block continuously as long as a condition remains True.",
-                image: null,
+                image: "assets/lesson10.png",
                 voiceText: "A while loop is like an engine that runs forever as long as its fuel switch stays True. We can use this to keep our program running non-stop!",
                 code: `fuel = 3\nwhile fuel > 0:\n    print("⚙️ Engine running! Fuel left:", fuel)\n    fuel = fuel - 1\nprint("🛑 Out of fuel. Stopping.")`,
                 guidelines: [
@@ -734,7 +734,7 @@
                 concept: "Labeled Storage",
                 conceptType: "cyan",
                 conceptDesc: "Storing values you look up by a name (a label) instead of by number.",
-                image: "assets/lesson15.png",
+                image: "assets/dictionaries.png",
                 voiceText: "A list uses numbered drawers, but a dictionary uses labeled jars. Maya writes a label on each jar — like 'iron' or 'copper' — and stores a count inside. To check a jar, she just asks for it by its label!",
                 code: ``,
                 guidelines: [
@@ -760,7 +760,7 @@
                 concept: "Simple Functions",
                 conceptType: "amber",
                 conceptDesc: "Bundling code blocks into reusable names using 'def'.",
-                image: null,
+                image: "assets/lesson11.png",
                 voiceText: "Functions are custom blueprints. You group a collection of commands together under one short name, so you can perform a complex task instantly anywhere in your code.",
                 code: `def boot_system():\n    print("Initializing Core...")\n    print("Waking up Cog-Bot...")\n    print("🟢 System Ready!")\n\nboot_system()`,
                 guidelines: [
@@ -783,7 +783,7 @@
                 concept: "Functions with Inputs",
                 conceptType: "emerald",
                 conceptDesc: "Passing external arguments into functions to alter their calculations.",
-                image: null,
+                image: "assets/lesson12.png",
                 voiceText: "We can pass data into our functions to customize how the blueprint works. Watch how the same function gives different results based on the number we feed it!",
                 code: `def calculate_gears(iron):\n    gear_count = iron * 3\n    print("Gears made:", gear_count)\n\ncalculate_gears(5)`,
                 guidelines: [
@@ -806,7 +806,7 @@
                 concept: "Capstone Calculator",
                 conceptType: "purple",
                 conceptDesc: "Combining loops, conditionals, variables, and dict structures into an interactive terminal app.",
-                image: null,
+                image: "assets/lesson13.png",
                 voiceText: "Time for your final challenge! You are going to build a continuous command center using a loop. It keeps track of workshop materials and lets you choose whether to check your inventory stock or craft an item.",
                 code: `inventory = {"iron": 15, "copper": 8}\n\ndef show_stock():\n    print("\\n📦 Iron:", inventory["iron"], "| Copper:", inventory["copper"])\n\nrunning = True\nwhile running:\n    show_stock()\n    action = input("Options: 1=Craft, 2=Exit -> ")\n    if action == "1":\n        if inventory["iron"] >= 5 and inventory["copper"] >= 4:\n            print("✨ Successfully crafted a drone component!")\n            inventory["iron"] -= 5\n            inventory["copper"] -= 4\n        else:\n            print("❌ Not enough materials!")\n    elif action == "2":\n        print("Goodbye, Master Engineer!")\n        running = False`,
                 guidelines: [
@@ -834,7 +834,7 @@
                 concept: "Desktop Graduation (VS Code)",
                 conceptType: "amber",
                 conceptDesc: "Transitioning from the browser playground to a local Python interpreter and VS Code environment.",
-                image: null,
+                image: "assets/lesson14.png",
                 voiceText: "Congratulations! You have completed the browser training course. Now you're ready to use real professional tools on your computer. Follow the steps on your screen to download Python, install VS Code, and bring your code into the real world!",
                 code: `# Follow the interactive checklist on the screen to set up your environment!\nprint("Master Inventor Status: Achieved.")`,
                 guidelines: [
